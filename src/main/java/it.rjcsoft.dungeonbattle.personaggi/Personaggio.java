@@ -5,7 +5,7 @@ public abstract class Personaggio
 
     private String nome;
     private int health;
-    private int attacco_base
+    private int attacco_base;
     private int max_health;
     private int armour;
     private boolean isAlive;
@@ -16,6 +16,7 @@ public abstract class Personaggio
         this.max_health = max_health;
         this.attacco_base = attacco_base;
         this.armour = 0;
+        this.health = this.max_health;
         this.isAlive = true;
     }
 
@@ -23,10 +24,7 @@ public abstract class Personaggio
     {
         return this.health;
     }
-    public int getHealth()
-    {
-        return this.health;
-    }
+
     public int getMax_health()
     {
         return this.max_health;
