@@ -1,3 +1,5 @@
+package it.rjcsoft.dungeonbattle.personaggi;
+
 public abstract class Nemico extends Personaggio
 {
     private int stamina;
