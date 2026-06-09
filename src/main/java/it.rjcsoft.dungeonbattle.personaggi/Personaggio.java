@@ -24,7 +24,6 @@ public abstract class Personaggio
     {
         return this.health;
     }
-
     public int getMax_health()
     {
         return this.max_health;
@@ -33,6 +32,10 @@ public abstract class Personaggio
     public int getArmour()
     {
         return this.armour
+    }
+    public boolean getStatus()
+    {
+        return this.isAlive;
     }
 
     public int getAttacco_base()
@@ -67,6 +70,21 @@ public abstract class Personaggio
 
             return this.getNome().equals(personaggio.getNome) && this.getMax_health() == personaggio.getMax_health() && this.getAttacco_base() == personaggio.getAttacco_base();
         }
+    }
+
+    public void takeDamage(int damage)
+    {
+        this.health -= damage;
+        if(isDead())
+            health = 0;
+
+    }
+
+    public void heal(int healing)
+    {
+        this.health += healing;
+        if(this.health > this.max_health)
+           this.health = this.max_health;
     }
 
 
