@@ -1,5 +1,6 @@
+package oggetti;
 
-	public abstract class Oggetto {
+public abstract class Oggetto {
 		private int attacco;
 		private int cura;
 		
