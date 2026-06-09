@@ -31,7 +31,7 @@ public abstract class Personaggio
 
     public int getArmour()
     {
-        return this.armour
+        return this.armour;
     }
     public boolean getStatus()
     {
@@ -68,7 +68,7 @@ public abstract class Personaggio
         {
             Personaggio personaggio = (Personaggio) obj;
 
-            return this.getNome().equals(personaggio.getNome) && this.getMax_health() == personaggio.getMax_health() && this.getAttacco_base() == personaggio.getAttacco_base();
+            return this.getNome().equals(personaggio.getNome()) && this.getMax_health() == personaggio.getMax_health() && this.getAttacco_base() == personaggio.getAttacco_base();
         }
     }
 
@@ -90,10 +90,11 @@ public abstract class Personaggio
 
     public String toString()
     {
-        System.out.println("{\n");
-        System.out.println("\tNome: " + thisg + "\n");
-        System.out.println("\t" + this.getHealth() + "/" + this.getMax_health() + "\n");
-        System.out.println("}\n");
+        String s = "{\n";
+        s += "\tNome: " + this + "\n";
+        s += "\t" + this.getHealth() + "/" + this.getMax_health() + "\n";
+        s += "}\n";
+        return s;
     }
 
     public abstract int attack();
