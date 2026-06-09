@@ -96,7 +96,7 @@ public abstract class Personaggio
         System.out.println("}\n");
     }
 
-    public abstract void attack();
+    public abstract int attack();
     public abstract void sprite();
 
 
