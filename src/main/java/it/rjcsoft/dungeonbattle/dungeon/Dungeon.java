@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-import it.rjcsoft.dungeonbattle.personaggi.Nemico;
+import it.rjcsoft.dungeonbattle.combatsystem.BattleManager;
+import it.rjcsoft.dungeonbattle.oggetti.Arma;
+import it.rjcsoft.dungeonbattle.personaggi.*;
 // import eroe
 // import battle manager
 import it.rjcsoft.dungeonbattle.nemici.Goblin;
@@ -16,6 +18,7 @@ public class Dungeon {
     private ArrayList<Nemico> nemici;
     private Nemico[] listaNemici;
     private final Scanner input = new Scanner(System.in);
+    private Eroe eroe;
     //private BattleManager battle;
 
     public Dungeon() {
@@ -31,6 +34,7 @@ public class Dungeon {
         listaNemici[7] = new Goblin("GOBLIN", 100,15);
         listaNemici[8] = new Scheletro("SCHELETRO", 80,10);
         //this.battle = new BattleManager();
+        //è UNA COSTANTE?
     }
 
 
@@ -41,7 +45,14 @@ public class Dungeon {
         }
     }
 
-    public void start() {
+    public void start(){
+        if (this.eroe == null) {
+            System.out.println("se");
+            this.eroe = new Eroe("Francesco Barsotti", 200, 20, new Arma(0), 3);
+        } else {
+            System.out.println("Te");
+            this.eroe.setHealth(eroe.getMax_health());
+        }
         System.out.println("Sei entrato nel dungeon");
         System.out.println(" ");
         System.out.println("Seleziona la difficoltà del dungeon");
@@ -51,7 +62,7 @@ public class Dungeon {
         System.out.println("3. Difficile");
         System.out.println("Altro per terminare il gioco");
 
-        int difficolta = input.nextInt();
+        int difficolta = input.nextInt();//non vi serve la variabile
         int quantita;
         switch (difficolta) {
             case 1:
@@ -77,22 +88,24 @@ public class Dungeon {
 
         generaNemici(quantita);
 
+        while(eroe.getHealth()>0 || nemici.get(quantita - 1) !=null){
 
-        while(eroe.getVita()>0 || nemici[quantita-1]!=null){
             System.out.println(" ");
             for(int i=0; i<quantita; i++) {
-            battle.inizioBattaglia(Eroe eroe, Nemico nemici[i]);
+                System.out.println("eroe : "+eroe.toString());
+                BattleManager battle = new BattleManager(nemici.get(i),eroe);
+            battle.iniziaCombattimento();
             try {
                 TimeUnit.SECONDS.sleep(5); 
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
-            if(eroe.getVita>0) 
+            if(eroe.getHealth()>0)
             nemici.remove(i);
-            System.out.println("Hai vinto il "+i+" scontro")
+            System.out.println("Hai vinto il "+i+" scontro");
             }
         }
-        if(eroe.getVita>0) {
+        if(eroe.getHealth()>0) {
             System.out.println(" ");
             System.out.println("HAI VINTO TUTTI GLI SCONTRI");
         }else {

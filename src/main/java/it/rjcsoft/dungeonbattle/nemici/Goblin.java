@@ -4,10 +4,9 @@ package it.rjcsoft.dungeonbattle.nemici;
 
 import it.rjcsoft.dungeonbattle.personaggi.Nemico;
 
-public class Goblin extends Nemico
-{
-    public Goblin (String nome,int max_health,int attacco_base){
-        super("GOBLIN", 100,15);
+public class Goblin extends Nemico {
+    public Goblin(String nome, int max_health, int attacco_base) {
+        super("GOBLIN", 100, 15);// sono costantiiiiiii
     }
 
     @Override
