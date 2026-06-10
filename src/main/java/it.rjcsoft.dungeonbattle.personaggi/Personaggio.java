@@ -7,7 +7,6 @@ public abstract class Personaggio
     private int health;
     private int attacco_base;
     private int max_health;
-    private int armour;
     private boolean isAlive;
 
     public Personaggio(String nome,int max_health,int attacco_base)
@@ -15,7 +14,6 @@ public abstract class Personaggio
         this.nome = nome;
         this.max_health = max_health;
         this.attacco_base = attacco_base;
-        this.armour = 0;
         this.health = this.max_health;
         this.isAlive = true;
     }
@@ -29,10 +27,7 @@ public abstract class Personaggio
         return this.max_health;
     }
 
-    public int getArmour()
-    {
-        return this.armour;
-    }
+
     public void setStatus(boolean status)
     {
         this.isAlive = status;
@@ -43,10 +38,7 @@ public abstract class Personaggio
         return this.isAlive;
     }
 
-    public void setArmour(int armour)
-    {
-        this.armour = armour;
-    }
+
     public void setHealth(int health)
     {
         this.health = health;
