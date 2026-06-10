@@ -80,7 +80,7 @@ public abstract class Personaggio
 
     }
 
-    public void heal(int healing)
+    public void heal()
     {
         this.health += healing;
         if(this.health > this.max_health)
