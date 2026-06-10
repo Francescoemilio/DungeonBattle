@@ -38,6 +38,11 @@ public abstract class Personaggio
         this.isAlive = status;
     }
 
+    public boolean getStatus()
+    {
+        return this.isAlive;
+    }
+
     public void setArmour(int armour)
     {
         this.armour = armour;
