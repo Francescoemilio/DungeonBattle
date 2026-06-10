@@ -4,10 +4,11 @@ public abstract class Nemico extends Personaggio
 {
     private int stamina;
     private int stamina_gain;
-    public Nemico(String nome,int max_health,int attacco_base)
+    public Nemico(String nome,int max_health,int attacco_base, int stamina_gain)
     {
         super(nome,max_health,attacco_base);
         this.stamina = 0;
+        this.stamina_gain = stamina_gain;
     }
 
     public int getStamina()
@@ -17,9 +18,9 @@ public abstract class Nemico extends Personaggio
 
     public abstract void special_ability();
 
-    public void gainStamina()
+    public void setStamina(int stamina)
     {
-        this.stamina += this.stamina_gain;
+        this.stamina = stamina;
     }
 
 }

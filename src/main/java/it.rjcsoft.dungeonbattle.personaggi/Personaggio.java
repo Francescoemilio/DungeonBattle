@@ -33,9 +33,18 @@ public abstract class Personaggio
     {
         return this.armour;
     }
-    public boolean getStatus()
+    public void setStatus(boolean status)
     {
-        return this.isAlive;
+        this.isAlive = status;
+    }
+
+    public void setArmour(int armour)
+    {
+        this.armour = armour;
+    }
+    public void setHealth(int health)
+    {
+        this.health = health;
     }
 
     public int getAttacco_base()
@@ -47,16 +56,7 @@ public abstract class Personaggio
         return this.nome;
     }
 
-    public boolean isDead()
-    {
-        if(this.getHealth() <= 0)
-        {
-            this.isAlive = false;
-            return true;
-        }
-        else
-            return false;
-    }
+
 
     public boolean equals(Object obj)
     {
@@ -72,20 +72,6 @@ public abstract class Personaggio
         }
     }
 
-    public void takeDamage(int damage)
-    {
-        this.health -= damage;
-        if(isDead())
-            health = 0;
-
-    }
-
-    public void heal(int healing)
-    {
-        this.health += healing;
-        if(this.health > this.max_health)
-           this.health = this.max_health;
-    }
 
 
     public String toString()
@@ -97,7 +83,7 @@ public abstract class Personaggio
         return s;
     }
 
-    public abstract int attack();
+
     public abstract void sprite();
 
 
