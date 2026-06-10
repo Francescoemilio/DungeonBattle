@@ -9,12 +9,12 @@ import java.util.Scanner;
 public class BattleManager {
     private Nemico nemico;
     private Eroe eroe;
-    private Scanner sc;
+    final int COSTANTE_ATTACCO = 10;
+    final float COSTANTE_DIFESA=0.7f;
 
     public BattleManager(Nemico nemico, Eroe eroe) {
         this.nemico = nemico;
         this.eroe = eroe;
-        this.sc = new Scanner(System.in);////NO NEL COSTRUTTORE
     }
 
     private int tiraDado() {
@@ -31,17 +31,17 @@ public class BattleManager {
             return;
         }
 
-        float colpo; //INT
+        int colpo;
         if (risultatoDado == 20) {
             System.out.println("COLPO CRITICO!");
             colpo = eroe.getAttacco_base() * 3;
         } else {
-            colpo = eroe.getAttacco_base() * ((float) risultatoDado / 10);
+            colpo = eroe.getAttacco_base() * (risultatoDado / COSTANTE_ATTACCO);
         }
 
-        System.out.println("Danno inflitto: " + String.format("%.1f", colpo));
-        int nuovoHealth = (int) (nemico.getHealth() - colpo);//no
-        nemico.setHealth(Math.max(0, nuovoHealth));
+        
+        int nuovoHealth = (nemico.getHealth() - colpo);//no
+        nemico.setHealth(nuovoHealth);
         System.out.println("Salute del nemico: " + nemico.getHealth());
     }
 
@@ -55,12 +55,12 @@ public class BattleManager {
             return;
         }
 
-        float colpo;//stessa ccon patate
+        int colpo;//stessa ccon patate
         if (risultatoDado == 20) {
             System.out.println("COLPO CRITICO DEL NEMICO!");
             colpo = nemico.getAttacco_base() * 2;
         } else {
-            colpo = nemico.getAttacco_base() * ((float) risultatoDado / 12);
+            colpo = nemico.getAttacco_base() * (risultatoDado / COSTANTE_ATTACCO);
         }
 
         // Applica la difesa belli i commenti di chat
@@ -70,9 +70,9 @@ public class BattleManager {
             System.out.println("Hai parato completamente l'attacco!");
         }
 
-        System.out.println("Danno subito: " + String.format("%.1f", colpo));
-        int nuovoHealth = (int) (eroe.getHealth() - colpo);//no
-        eroe.setHealth(Math.max(0, nuovoHealth));
+        System.out.println("Danno subito: " +  colpo);
+        int nuovoHealth = eroe.getHealth() - colpo;
+        eroe.setHealth(nuovoHealth);
         System.out.println("Tua salute: " + eroe.getHealth());
     }
 
@@ -80,8 +80,14 @@ public class BattleManager {
         System.out.println("\n--- USA OGGETTO ---");
         System.out.println("Hai usato una pozione curativa!");
         Pozione pozione = eroe.getPozione();
-        int nuovaSalute = eroe.getHealth() + pozione.getCura();//non vi serve la variabile
-        eroe.setHealth(nuovaSalute);
+        int nuovaSalute = eroe.getHealth() + pozione.getCura();
+        if(nuovaSalute<200){
+            eroe.setHealth(nuovaSalute);
+        } 
+        else{
+            eroe.setHealth(200);
+        }   
+        
         System.out.println("Ti sei curato di " + pozione.getCura() + " punti!");
         System.out.println("Tua salute: " + eroe.getHealth());
     }
@@ -89,6 +95,7 @@ public class BattleManager {
     private void turno() {
         int difesa = 0;
         int scelta = -1;
+        Scanner sc = new Scanner(System.in);
 
         // Mostra stato attuale GEMINI O CHAT?
         System.out.println("\n========== STATO COMBATTIMENTO ==========");
@@ -111,7 +118,7 @@ public class BattleManager {
                 battleAttack(eroe, nemico);
                 break;
             case 2:
-                difesa = (int) (0.7 * tiraDado());//é UNA COSTANTEEEEEE 
+                difesa = (int)(COSTANTE_DIFESA * tiraDado());//Corretto
                 System.out.println("\n--- DIFESA ---");
                 System.out.println("Punti difesa: " + difesa);
                 break;
@@ -127,7 +134,7 @@ public class BattleManager {
     }
 
     public void iniziaCombattimento() {
-        System.out.println("\n⚔️ INIZIA IL COMBATTIMENTO! ⚔️\n");
+        System.out.println("\n INIZIA IL COMBATTIMENTO! \n");
 
         while (nemico.getHealth() > 0 && eroe.getHealth() > 0) {
             turno();
@@ -143,13 +150,10 @@ public class BattleManager {
         // Risultato finale
         System.out.println("\n========== FINE COMBATTIMENTO ==========");
         if (eroe.getHealth() <= 0) {
-            System.out.println("💀 GAME OVER! Sei stato sconfitto... 💀");
+            System.out.println(" GAME OVER! Sei stato sconfitto... ");
         } else {
-            System.out.println("🎉 VITTORIA! Hai sconfitto il nemico! 🎉");
+            System.out.println(" VITTORIA! Hai sconfitto il nemico! ");
         }
         System.out.println("=========================================");
-
-        // Chiudi scanner alla fine
-        sc.close();//sicuri?
     }
 }

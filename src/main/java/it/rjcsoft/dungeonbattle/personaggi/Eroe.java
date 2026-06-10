@@ -8,8 +8,8 @@ public class Eroe extends Personaggio {
 	private Oggetto oggetto;
 	private ArrayList<Oggetto> o;
 
-	public Eroe(String nome, int max_health, int attacco_base, Oggetto arma, int nPozioni) {
-		super(nome, max_health, attacco_base); maxHealth, attaccoBase
+	public Eroe(String nome, int maxHealth, int attaccoBase, Oggetto arma, int nPozioni) {
+		super(nome, maxHealth, attaccoBase); 
 		oggetto = arma;
 		o = new ArrayList<Oggetto>(nPozioni);
 		System.out.println(o.size() + "    " + nPozioni);
