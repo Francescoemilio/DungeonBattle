@@ -8,4 +8,8 @@ public class Goblin extends Nemico
         super("GOBLIN", 100,15);
     }
 
+    @Override
+    public void sprite() {
+        System.out.println("GOBLIN");
+    }
 }

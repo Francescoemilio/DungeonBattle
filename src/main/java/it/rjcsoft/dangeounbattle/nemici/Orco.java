@@ -2,9 +2,13 @@ package it.rjcsoft.dangeounbattle.nemici;
 
 import it.rjcsoft.dungeonbattle.personaggi.Nemico;
 
-public class Goblin extends Nemico
+public class Orco extends Nemico
 {
-    public Goblin (String nome,int max_health,int attacco_base){
+    public Orco (String nome,int max_health,int attacco_base){
         super("ORCO", 150,30);
+    }
+    @Override
+    public void sprite() {
+        System.out.println("ORCO");
     }
 }
