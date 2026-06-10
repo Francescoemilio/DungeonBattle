@@ -5,7 +5,11 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 import it.rjcsoft.dungeonbattle.personaggi.Nemico;
+// import eroe
+// import battle manager
+import it.rjcsoft.dungeonbattle.nemici.Goblin;
 import it.rjcsoft.dungeonbattle.nemici.Orco;
+import it.rjcsoft.dungeonbattle.nemici.Scheletro;
 
 
 public class Dungeon {
@@ -17,16 +21,16 @@ public class Dungeon {
     public Dungeon() {
         nemici = new ArrayList<>();
         listaNemici = new Nemico[9];
-        listaNemici[0] = new Orco();
-        listaNemici[1] = new Goblin();
-        listaNemici[2] = new Scheletro();
-        listaNemici[3] = new Orco();
-        listaNemici[4] = new Goblin();
-        listaNemici[5] = new Scheletro();
-        listaNemici[6] = new Orco();
-        listaNemici[7] = new Goblin();
-        listaNemici[8] = new Scheletro();
-        this.battle = new BattleManager();
+        listaNemici[0] = new Orco("ORCO", 150, 30);
+        listaNemici[1] = new Goblin("GOBLIN", 100,15);
+        listaNemici[2] = new Scheletro("SCHELETRO", 80,10);
+        listaNemici[3] = new Orco("ORCO", 150, 30);
+        listaNemici[4] = new Goblin("GOBLIN", 100,15);
+        listaNemici[5] = new Scheletro("SCHELETRO", 80,10);
+        listaNemici[6] = new Orco("ORCO", 150, 30);
+        listaNemici[7] = new Goblin("GOBLIN", 100,15);
+        listaNemici[8] = new Scheletro("SCHELETRO", 80,10);
+        //this.battle = new BattleManager();
     }
 
 

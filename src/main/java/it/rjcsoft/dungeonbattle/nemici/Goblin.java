@@ -1,5 +1,7 @@
 package it.rjcsoft.dungeonbattle.nemici;
 
+
+
 import it.rjcsoft.dungeonbattle.personaggi.Nemico;
 
 public class Goblin extends Nemico
