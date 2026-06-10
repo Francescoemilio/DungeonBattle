@@ -1,11 +1,11 @@
-package it.rjcsoft.dungeonbattle.personaggi;
+package it.rjcsoft.dungeonbattle.eroe;
 
 public abstract class Personaggio
 {
 
     private String nome;
     private int health;
-    private int attacco_base
+    private int attacco_base;
     private int max_health;
     private int armour;
     private boolean isAlive;
@@ -23,10 +23,7 @@ public abstract class Personaggio
     {
         return this.health;
     }
-    public int getHealth()
-    {
-        return this.health;
-    }
+    
     public int getMax_health()
     {
         return this.max_health;
@@ -34,7 +31,7 @@ public abstract class Personaggio
 
     public int getArmour()
     {
-        return this.armour
+        return this.armour;
     }
 
     public int getAttacco_base()

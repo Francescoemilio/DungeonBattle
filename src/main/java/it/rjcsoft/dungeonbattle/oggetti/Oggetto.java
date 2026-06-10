@@ -1,4 +1,4 @@
-package oggetti;
+package it.rjcsoft.dungeonbattle.oggetti;
 
 import it.rjcsoft.dungeonbattle.personaggi.Personaggio;
 
@@ -11,4 +11,9 @@ public abstract class Oggetto {
 			this.descrizione=descrizione;
 		}
 		public abstract void usa(Personaggio p);
+		
+		public void stampa() {
+			System.out.println(nome);
+			System.out.println(descrizione);
+		}
 }
