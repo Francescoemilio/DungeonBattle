@@ -1,4 +1,4 @@
-package it.rjcsoft.dangeounbattle.nemici;
+package it.rjcsoft.dungeonbattle.nemici;
 
 import it.rjcsoft.dungeonbattle.personaggi.Nemico;
 

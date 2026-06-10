@@ -1,4 +1,4 @@
-package oggetti;
+package it.rjcsoft.dungeonbattle.oggetti;
 
 public abstract class Oggetto {
 		private int attacco;
