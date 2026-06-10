@@ -16,7 +16,7 @@ public abstract class Nemico extends Personaggio
        return this.stamina;
     }
 
-    public abstract void special_ability();
+
 
     public void setStamina(int stamina)
     {
