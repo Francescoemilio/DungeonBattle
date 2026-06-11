@@ -5,30 +5,30 @@ import it.rjcsoft.dungeonbattle.oggetti.Pozione;
 import java.util.ArrayList;
 
 public class Eroe extends Personaggio {
-	private Oggetto oggetto;
-	private ArrayList<Oggetto> o;
+	private Oggetto oggettoEquipaggiato;
+	private ArrayList<Oggetto> inventario;
 	private static final int MAX_VITA = 250;
 	private static final int ATTACCO_BASE = 20;
 
 	public Eroe(String nome,  Oggetto arma, int nPozioni) {
 		super(nome ,MAX_VITA,ATTACCO_BASE);
-		oggetto = arma;
-		o = new ArrayList<Oggetto>(nPozioni);
-		System.out.println(o.size() + "    " + nPozioni);
+		oggettoEquipaggiato = arma;
+		inventario = new ArrayList<Oggetto>(nPozioni);
+		System.out.println(inventario.size() + "    " + nPozioni);
 		for (int i = 0; i < nPozioni; i++) {
-			o.add(new Pozione(50));
+			inventario.add(new Pozione(50));
 		}
 	}
 
 	public void stampa() {
 		for (int i = 0; i < 10; i++) {
-			o.get(i).stampa();
+			inventario.get(i).stampa();
 		}
 	}
 
 	public Pozione getPozione() {
-		Pozione pozione = (Pozione) o.get(0);
-		o.remove(0);
+		Pozione pozione = (Pozione) inventario.get(0);
+		inventario.remove(0);
 		return pozione;
 
 	}
@@ -39,12 +39,12 @@ public class Eroe extends Personaggio {
 
 	@Override
 	public String toString() {
-		return "Eroe [oggetto=" + oggetto + ", o=" + o + "]";
+		return "Eroe [oggetto=" + oggettoEquipaggiato + ", o=" + inventario + "]";
 	}
 	
 	public void stampaInventario() {
-		for(int i=0; i<o.size();i++) {
-			o.get(i).stampa();
+		for(int i=0; i<inventario.size();i++) {
+			inventario.get(i).stampa();
 			System.out.println("---------");
 		}
 	}

@@ -1,9 +1,8 @@
 package it.rjcsoft.dungeonbattle.combatsystem;
 
+import it.rjcsoft.dungeonbattle.personaggi.*;
 import it.rjcsoft.dungeonbattle.nemici.*;
-import it.rjcsoft.dungeonbattle.personaggi.Nemico;
-import it.rjcsoft.dungeonbattle.oggetti.Pozione;
-import it.rjcsoft.dungeonbattle.personaggi.Eroe;
+import it.rjcsoft.dungeonbattle.oggetti.*;
 
 import java.util.Scanner;
 
@@ -36,6 +35,25 @@ public class BattleManager {
 
     private int tiraDado() {
         return (int) (Math.random() * 20) + 1;
+    }
+
+    private void forziere(){
+        int risultatoDado = tiraDado();
+
+        if(risultatoDado > 16){
+            System.out.println("Hai trovato un forziere!");
+
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+
+            int dadoArmaNuova = tiraDado();
+            if(dadoArmaNuova > 5){}
+
+
+        }
     }
 
     private void battleAttack(Eroe eroe, Nemico nemico,boolean specialMove) {
