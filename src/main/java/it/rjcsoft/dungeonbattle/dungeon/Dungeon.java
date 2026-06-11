@@ -1,5 +1,6 @@
 package it.rjcsoft.dungeonbattle.dungeon;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -44,7 +45,7 @@ public class Dungeon {
         }
     }
 
-    public void start(){
+    public void start()throws IOException{
         if (this.eroe == null) {
             this.eroe = new Eroe("Francesco Barsotti", new Arma(), NPOZIONI_INIZIALI);
         } else {
@@ -59,10 +60,8 @@ public class Dungeon {
         System.out.println("2. Medio");
         System.out.println("3. Difficile");
         System.out.println("Altro per terminare il gioco");
-
-        int difficolta = input.nextInt();//non vi serve la variabile
         int quantita;
-        switch (difficolta) {
+        switch (input.nextInt()) {
             case 1:
                 quantita = 3;
                 System.out.println(" ");
@@ -118,8 +117,7 @@ public class Dungeon {
         System.out.println(" ");
         System.out.println("1. Si");
         System.out.println("2. No");
-        int newP = input.nextInt();
-        switch (newP){
+        switch (input.nextInt()){
             case 1:
                 System.out.println("Ripartiamo!");
                 System.out.println(" ");
