@@ -30,6 +30,7 @@ public class BattleManager {
             System.out.println(" ");
             System.out.println("--- INFO OGGETTI ALL'AVVIO ---");
             System.out.println(" 5 POZIONI ( AGGIUNGONO OGNUNA 50 PUNTI VITA ) ");
+            turno();
 
     }
 
