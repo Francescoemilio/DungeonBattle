@@ -3,8 +3,12 @@ package it.rjcsoft.dungeonbattle.nemici;
 import it.rjcsoft.dungeonbattle.personaggi.Nemico;
 
 public class Orco extends Nemico {
-    public Orco(String nome, int max_health, int attacco_base) {
-        super("ORCO", 150, 30);
+
+    private static final int MAX_VITA = 150;
+    private static final int ATTACCO_BASE = 30;
+
+    public Orco(String nome) {
+        super("ORCO", MAX_VITA, ATTACCO_BASE);
     }
 
     @Override

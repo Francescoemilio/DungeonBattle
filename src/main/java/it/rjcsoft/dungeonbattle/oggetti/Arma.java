@@ -9,5 +9,10 @@ public class Arma extends Oggetto {
 		this.attacco = attacco;
 
 	}
+	public Arma()
+	{
+		super("Spada","Spada");
+		this.attacco = 0;
+	}
 
 }

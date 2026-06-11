@@ -3,8 +3,11 @@ package it.rjcsoft.dungeonbattle.nemici;
 import it.rjcsoft.dungeonbattle.personaggi.Nemico;
 
 public class Scheletro extends Nemico {
-    public Scheletro(String nome, int max_health, int attacco_base) {
-        super("SCHELETRO", 80, 10);
+    private static final int MAX_VITA = 80;
+    private static final int ATTACCO_BASE = 10;
+
+    public Scheletro(String nome) {
+        super("SCHELETRO", MAX_VITA, ATTACCO_BASE);
     }
 
     @Override

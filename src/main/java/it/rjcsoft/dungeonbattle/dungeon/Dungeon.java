@@ -16,19 +16,21 @@ public class Dungeon {
     private Nemico[] listaNemici;
     private final Scanner input = new Scanner(System.in);
     private Eroe eroe;
+    private final int NPOZIONI_INIZIALI = 4;
+
 
     public Dungeon() {
         nemici = new ArrayList<>();
         listaNemici = new Nemico[9];
-        listaNemici[0] = new Orco("ORCO", 150, 30);
-        listaNemici[1] = new Goblin("GOBLIN", 100,15);
-        listaNemici[2] = new Scheletro("SCHELETRO", 80,10);
-        listaNemici[3] = new Orco("ORCO", 150, 30);
-        listaNemici[4] = new Goblin("GOBLIN", 100,15);
-        listaNemici[5] = new Scheletro("SCHELETRO", 80,10);
-        listaNemici[6] = new Orco("ORCO", 150, 30);
-        listaNemici[7] = new Goblin("GOBLIN", 100,15);
-        listaNemici[8] = new Scheletro("SCHELETRO", 80,10);
+        listaNemici[0] = new Orco("ORCO");
+        listaNemici[1] = new Goblin("GOBLIN");
+        listaNemici[2] = new Scheletro("SCHELETRO");
+        listaNemici[3] = new Orco("ORCO");
+        listaNemici[4] = new Goblin("GOBLIN");
+        listaNemici[5] = new Scheletro("SCHELETRO");
+        listaNemici[6] = new Orco("ORCO");
+        listaNemici[7] = new Goblin("GOBLIN");
+        listaNemici[8] = new Scheletro("SCHELETRO");
         //è UNA COSTANTE?
     }
 
@@ -42,11 +44,10 @@ public class Dungeon {
 
     public void start(){
         if (this.eroe == null) {
-            System.out.println("se");
-            this.eroe = new Eroe("Francesco Barsotti", 200, 20, new Arma(0), 3);
+            this.eroe = new Eroe("Francesco Barsotti", new Arma(), NPOZIONI_INIZIALI);
         } else {
-            System.out.println("Te");
-            this.eroe.setHealth(eroe.getMax_health());
+
+            this.eroe.setHealth(eroe.getMaxHealth());
         }
         System.out.println("Sei entrato nel dungeon");
         System.out.println(" ");
@@ -86,7 +87,6 @@ public class Dungeon {
         while(eroe.getHealth()>0 && !nemici.isEmpty()){
             int counterScontri=0;
             System.out.println(" ");
-            System.out.println("eroe : "+eroe.toString());
             BattleManager battle = new BattleManager(nemici.getFirst(),eroe);
             battle.iniziaCombattimento();
             try {

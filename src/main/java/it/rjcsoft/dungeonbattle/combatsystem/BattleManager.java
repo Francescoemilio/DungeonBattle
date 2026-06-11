@@ -43,17 +43,27 @@ public class BattleManager {
         int colpo;
         if (risultatoDado == 20) {
             System.out.println("COLPO CRITICO!");
-            colpo = eroe.getAttacco_base() * 3;
+            colpo = eroe.getAttaccoBase() * 3;
         } else {
-            colpo = eroe.getAttacco_base() * (risultatoDado / COSTANTE_ATTACCO);
+            colpo = eroe.getAttaccoBase() * (risultatoDado / COSTANTE_ATTACCO);
         }
 
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
         
         int nuovoHealth = (nemico.getHealth() - colpo);//no
         nemico.setHealth(nuovoHealth);
         if(nemico.getHealth() < VITA_FINITA)
             nemico.setHealth(VITA_FINITA);
         System.out.println("Salute del nemico: " + nemico.getHealth());
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 
     private void nemicoAttack(int difesa) {
@@ -66,38 +76,75 @@ public class BattleManager {
             return;
         }
 
+
+
         int colpo;//stessa ccon patate
         if (risultatoDado == 20) {
             System.out.println("COLPO CRITICO DEL NEMICO!");
-            colpo = nemico.getAttacco_base() * 2;
+            colpo = nemico.getAttaccoBase() * 2;
         } else {
-            colpo = nemico.getAttacco_base() * (risultatoDado / COSTANTE_ATTACCO);
+            colpo = nemico.getAttaccoBase() * (risultatoDado / COSTANTE_ATTACCO);
+        }
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
 
 
-
         System.out.println("Danno subito: " +  colpo);
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
 
         eroe.setHealth(eroe.getHealth()-colpo);
         if(eroe.getHealth() <VITA_FINITA)
             eroe.setHealth(VITA_FINITA);
         System.out.println("Tua salute: " + eroe.getHealth());
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 
     private void usaOggetto() {
         System.out.println("\n--- USA OGGETTO ---");
-        System.out.println("Hai usato una pozione curativa!");
+
         Pozione pozione = eroe.getPozione();
-        int nuovaSalute = eroe.getHealth() + pozione.getCura();
-        if(nuovaSalute<200){
-            eroe.setHealth(nuovaSalute);
-        } 
-        else{
-            eroe.setHealth(200);
-        }   
-        
-        System.out.println("Ti sei curato di " + pozione.getCura() + " punti!");
-        System.out.println("Tua salute: " + eroe.getHealth());
+        if(pozione == null)
+            System.out.println("Hai finito le pozioni!");
+        else
+        {
+            int differenzaVita = eroe.getMaxHealth()-eroe.getHealth();
+            eroe.setHealth(eroe.getHealth() + pozione.getCura());
+
+            if(eroe.getHealth() > eroe.getMaxHealth())
+            {
+                System.out.println("Ti sei curato di " + differenzaVita+ " punti!");
+                eroe.setHealth(eroe.getMaxHealth());
+            }
+            else
+                System.out.println("Ti sei curato di " + pozione.getCura() + " punti!");
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+
+            System.out.println("Tua salute: " + eroe.getHealth());
+            System.out.println("Hai usato una pozione curativa!");
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+
+        }
     }
 
     private void turno() {
@@ -105,7 +152,12 @@ public class BattleManager {
         int scelta;
         Scanner sc = new Scanner(System.in);
 
-        // Mostra stato attuale GEMINI O CHAT?
+        try {
+            Thread.sleep(1800);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
         System.out.println("\n========== STATO COMBATTIMENTO ==========");
         System.out.println("Tua salute: " + eroe.getHealth());
         System.out.println("Salute nemico: " + nemico.getHealth());
