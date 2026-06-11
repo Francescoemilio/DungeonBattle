@@ -11,8 +11,15 @@ public abstract class Oggetto {
 		this.descrizione = descrizione;
 	}
 
-	public void stampa() {
-		System.out.println(nome);
-		System.out.println(descrizione);
+	@Override
+	public String toString() {
+		return "Oggetto{" +
+				"nome='" + nome + '\'' +
+				", descrizione='" + descrizione + '\'' +
+				'}';
+	}
+
+	public String getNome() {
+		return nome;
 	}
 }

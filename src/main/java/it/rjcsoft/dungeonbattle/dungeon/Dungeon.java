@@ -50,7 +50,7 @@ public class Dungeon {
 
     public void start()throws IOException{
         if (this.eroe == null) {
-            this.eroe = new Eroe("Francesco Barsotti", new Arma(), NPOZIONI_INIZIALI);
+            this.eroe = new Eroe("Francesco Barsotti",  NPOZIONI_INIZIALI);
         } else {
 
             this.eroe.setHealth(eroe.getMaxHealth());
