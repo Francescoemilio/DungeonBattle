@@ -86,8 +86,8 @@ public class Dungeon {
         while(eroe.getHealth()>0 && !nemici.isEmpty()){
             int counterScontri=0;
             System.out.println(" ");
-                System.out.println("eroe : "+eroe.toString());
-                BattleManager battle = new BattleManager(nemici.get(i),eroe);
+            System.out.println("eroe : "+eroe.toString());
+            BattleManager battle = new BattleManager(nemici.getFirst(),eroe);
             battle.iniziaCombattimento();
             try {
                 TimeUnit.SECONDS.sleep(5); 
