@@ -22,6 +22,13 @@ public class Dungeon {
     public Dungeon() {
         nemici = new ArrayList<>();
         listaNemici = new Nemico[9];
+        //è UNA COSTANTE?
+    }
+
+
+    public void generaNemici(int quantita) {
+
+        listaNemici = new Nemico[9];
         listaNemici[0] = new Orco("ORCO");
         listaNemici[1] = new Goblin("GOBLIN");
         listaNemici[2] = new Scheletro("SCHELETRO");
@@ -31,11 +38,6 @@ public class Dungeon {
         listaNemici[6] = new Orco("ORCO");
         listaNemici[7] = new Goblin("GOBLIN");
         listaNemici[8] = new Scheletro("SCHELETRO");
-        //è UNA COSTANTE?
-    }
-
-
-    public void generaNemici(int quantita) {
         for(int i = 0; i < quantita; i++) {
             nemici.add(listaNemici[i]);
 
