@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Eroe extends Personaggio {
 	private Oggetto oggetto;
 	private ArrayList<Oggetto> o;
-	private static final int MAX_VITA = 200;
+	private static final int MAX_VITA = 250;
 	private static final int ATTACCO_BASE = 20;
 
 	public Eroe(String nome,  Oggetto arma, int nPozioni) {
