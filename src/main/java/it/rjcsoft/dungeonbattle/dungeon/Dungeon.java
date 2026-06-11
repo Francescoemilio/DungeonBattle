@@ -85,9 +85,8 @@ public class Dungeon {
         };
 
         generaNemici(quantita);
-
+        int counterScontri=0;
         while(eroe.getHealth()>0 && !nemici.isEmpty()){
-            int counterScontri=0;
             System.out.println(" ");
             BattleManager battle = new BattleManager(nemici.getFirst(),eroe);
             battle.iniziaCombattimento();
