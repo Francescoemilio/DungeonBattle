@@ -10,7 +10,7 @@ public class Goblin extends Nemico {
     private static final int ATTACCO_BASE = 15;
     private static final String NOME = "GOBLIN";
 
-    public Goblin(String nome) {
+    public Goblin() {
         super(NOME, MAX_VITA, ATTACCO_BASE);
     }
 

@@ -33,15 +33,15 @@ public class Dungeon {
     public void generaNemici(int quantita) {
 
         listaNemici = new Nemico[9];
-        listaNemici[0] = new Orco("ORCO");
-        listaNemici[1] = new Goblin("GOBLIN");
-        listaNemici[2] = new Scheletro("SCHELETRO");
-        listaNemici[3] = new Orco("ORCO");
-        listaNemici[4] = new Goblin("GOBLIN");
-        listaNemici[5] = new Scheletro("SCHELETRO");
-        listaNemici[6] = new Orco("ORCO");
-        listaNemici[7] = new Goblin("GOBLIN");
-        listaNemici[8] = new Scheletro("SCHELETRO");
+        listaNemici[0] = new Orco();
+        listaNemici[1] = new Goblin();
+        listaNemici[2] = new Scheletro();
+        listaNemici[3] = new Orco();
+        listaNemici[4] = new Goblin();
+        listaNemici[5] = new Scheletro();
+        listaNemici[6] = new Orco();
+        listaNemici[7] = new Goblin();
+        listaNemici[8] = new Scheletro();
         for(int i = 0; i < quantita; i++) {
             nemici.add(listaNemici[i]);
 

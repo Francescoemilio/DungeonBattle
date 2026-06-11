@@ -3,10 +3,11 @@ package it.rjcsoft.dungeonbattle.nemici;
 public class Drago extends Boss {
 	
 	private static final int MAX_VITA = 100;
-    private static int ATTACCO_BASE = 15;
-	
+    private static final int ATTACCO_BASE = 15;
+	private static final String NOME = "DRAGO";
+
 	public Drago() {
-		super("DRAGO", MAX_VITA, ATTACCO_BASE);
+		super(NOME, MAX_VITA, ATTACCO_BASE);
 	}
 
 	@Override
