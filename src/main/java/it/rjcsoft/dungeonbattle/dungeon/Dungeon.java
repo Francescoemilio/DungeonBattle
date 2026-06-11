@@ -60,7 +60,7 @@ public class Dungeon {
         System.out.println("2. Medio");
         System.out.println("3. Difficile");
         System.out.println("Altro per terminare il gioco");
-        int quantita;
+        int quantita = 0;
         switch (input.nextInt()) {
             case 1:
                 quantita = 3;
