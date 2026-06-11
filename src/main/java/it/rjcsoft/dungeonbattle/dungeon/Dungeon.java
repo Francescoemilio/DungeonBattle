@@ -18,6 +18,9 @@ public class Dungeon {
     private final Scanner input = new Scanner(System.in);
     private Eroe eroe;
     private final int NPOZIONI_INIZIALI = 4;
+    private final int NEMICI_FACILE = 3;
+    private final int NEMICI_NORMALE = 6;
+    private final int NEMICI_DIFFICILE = 9;
 
 
     public Dungeon() {
@@ -63,17 +66,17 @@ public class Dungeon {
         int quantita = 0;
         switch (input.nextInt()) {
             case 1:
-                quantita = 3;
+                quantita = NEMICI_FACILE;
                 System.out.println(" ");
                 System.out.println("Difficoltà selezionata -> FACILE");
                 break;
             case 2:
-                quantita = 6;
+                quantita = NEMICI_NORMALE;
                 System.out.println(" ");
                 System.out.println("Difficoltà selezionata -> MEDIO");
                 break;
             case 3:
-                quantita = 9;
+                quantita = NEMICI_DIFFICILE;
                 System.out.println(" ");
                 System.out.println("Difficoltà selezionata -> DIFFICILE");
                 break;
