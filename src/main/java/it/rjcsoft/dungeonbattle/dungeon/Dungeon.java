@@ -66,7 +66,7 @@ public class Dungeon {
         int quantita;
         switch (difficolta) {
             case 1:
-                quantita = 3;
+                quantita = 1;
                 System.out.println(" ");
                 System.out.println("Difficoltà selezionata -> FACILE");
                 break;
@@ -87,8 +87,8 @@ public class Dungeon {
         };
 
         generaNemici(quantita);
-        int scontriVinti = 0;
-        while(eroe.getHealth()>0 || nemici.get(quantita - 1) !=null){
+        int scontriVinti = 1;
+        while(eroe.getHealth()>0 && !nemici.isEmpty()){
 
             System.out.println(" ");
             System.out.println("eroe : "+eroe.toString());
