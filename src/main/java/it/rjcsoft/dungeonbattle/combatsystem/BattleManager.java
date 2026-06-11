@@ -20,6 +20,19 @@ public class BattleManager {
         mossaSpeciale = true;
     }
 
+    private void stampaLegenda(){
+            System.out.println("--- LEGENDA ---");
+            System.out.println(" ");
+            System.out.println("--- DIFFICOLTA' ---");
+            System.out.println("FACILE     = 3 NEMICI");
+            System.out.println("MEDIA      = 6 NEMICI");
+            System.out.println("DIFFICILE  = 9 NEMICI");
+            System.out.println(" ");
+            System.out.println("--- INFO OGGETTI ALL'AVVIO ---");
+            System.out.println(" 5 POZIONI ( AGGIUNGONO OGNUNA 50 PUNTI VITA ) ");
+            
+    }
+
     private int tiraDado() {
         return (int) (Math.random() * 20) + 1;
     }
@@ -179,12 +192,12 @@ public class BattleManager {
 
         // Scegli azione
         do {
-            System.out.print("\nCosa vuoi fare?\n1: Attacca | 2: Usa mossa speciale | 3: Usa oggetto\nScelta: ");
+            System.out.print("\nCosa vuoi fare?\n1: Attacca | 2: Usa mossa speciale | 3: Usa oggetto | 4: Legenda\nScelta: ");
             scelta = sc.nextInt();
-            if (scelta < 1 || scelta > 3) {
+            if (scelta < 1 || scelta > 4) {
                 System.out.println("Scelta non valida! Riprova.");
             }
-        } while (scelta < 1 || scelta > 3);
+        } while (scelta < 1 || scelta > 4);
 
         // Esegui azione
         switch (scelta) {
@@ -199,6 +212,9 @@ public class BattleManager {
                 break;
             case 3:
                 usaOggetto();
+                break;
+            case 4:
+                stampaLegenda();
                 break;
         }
 
