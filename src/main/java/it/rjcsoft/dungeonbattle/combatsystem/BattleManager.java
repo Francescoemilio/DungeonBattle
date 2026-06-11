@@ -1,5 +1,6 @@
 package it.rjcsoft.dungeonbattle.combatsystem;
 
+import it.rjcsoft.dungeonbattle.nemici.*;
 import it.rjcsoft.dungeonbattle.personaggi.Nemico;
 import it.rjcsoft.dungeonbattle.oggetti.Pozione;
 import it.rjcsoft.dungeonbattle.personaggi.Eroe;
@@ -45,7 +46,7 @@ public class BattleManager {
             System.out.println("COLPO CRITICO!");
             colpo = eroe.getAttaccoBase() * 3;
         } else {
-            colpo = eroe.getAttaccoBase() * (risultatoDado / COSTANTE_ATTACCO);
+            colpo = (int) (nemico.getAttaccoBase() * ((double) risultatoDado / COSTANTE_ATTACCO));
         }
 
         try {
@@ -66,24 +67,37 @@ public class BattleManager {
         }
     }
 
-    private void nemicoAttack(int difesa) {
+    private void nemicoAttack() {
         int risultatoDado = tiraDado();
         System.out.println("\n--- ATTACCO NEMICO ---");
         System.out.println("Tiro dado: " + risultatoDado);
 
-        if (risultatoDado < 4) {
+        if(this.nemico instanceof Orco){
+            if(risultatoDado < 12){
+                System.out.println("Mancato!");
+                return;
+            }
+
+        }
+
+        if(this.nemico instanceof Goblin){
+            if(risultatoDado < 5){
+                System.out.println("Mancato!");
+                return;
+            }
+        }
+
+        if (risultatoDado < 3) { //scheletro
             System.out.println("Il nemico ha mancato!");
             return;
         }
 
-
-
-        int colpo;//stessa ccon patate
+        int colpo;
         if (risultatoDado == 20) {
             System.out.println("COLPO CRITICO DEL NEMICO!");
-            colpo = nemico.getAttaccoBase() * 2;
+            colpo = nemico.getAttaccoBase() * 3;
         } else {
-            colpo = nemico.getAttaccoBase() * (risultatoDado / COSTANTE_ATTACCO);
+            colpo = (int) (nemico.getAttaccoBase() * ((double) risultatoDado / COSTANTE_ATTACCO));
         }
         try {
             Thread.sleep(500);
@@ -190,12 +204,14 @@ public class BattleManager {
 
         // Turno del nemico (solo se è ancora vivo)
         if (nemico.getHealth() > VITA_FINITA) {
-            nemicoAttack(difesa);
+            nemicoAttack();
         }
     }
 
     public void iniziaCombattimento() {
         System.out.println("\n INIZIA IL COMBATTIMENTO! \n");
+
+        nemico.sprite();
 
         while (nemico.getHealth() > 0 && eroe.getHealth() > 0) {
             turno();

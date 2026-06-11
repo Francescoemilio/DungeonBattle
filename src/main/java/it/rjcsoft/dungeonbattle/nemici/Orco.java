@@ -13,6 +13,25 @@ public class Orco extends Nemico {
 
     @Override
     public void sprite() {
-        System.out.println("ORCO");
+        System.out.println("                        _,.---''```````'-.");
+        System.out.println("                    ,-'`                  `-._");
+        System.out.println("                 ,-`                   __,-``,\\");
+        System.out.println("                /             _       /,'  ,|/ \\");
+        System.out.println("              ,'         ,''-<_`'.    |  ,' |   \\");
+        System.out.println("             /          / _    `  `.  | / \\ |\\  |");
+        System.out.println("             |         (  |`'-,---, `'  \\_|/ |  |");
+        System.out.println("             |         |`  \\  \\|  /  __,    _ \\ |");
+        System.out.println("             |         |    `._\\,'  '    ,-`_\\ \\|");
+        System.out.println("             |         |        ,----      /|   )");
+        System.out.println("             \\         \\       / --.      {/   /|");
+        System.out.println("              \\         | |       `.\\         / |");
+        System.out.println("               \\        / `-.                 | /");
+        System.out.println("                `.     |     `-        _,--V`)\\/        _-");
+        System.out.println("                  `,   |           /``V_,.--`  \\.  _,-'`");
+        System.out.println("                   /`--'`._        `-'`         )`'");
+        System.out.println("                  /        `-.            _,.-'`");
+        System.out.println("                              `-.____,.-'`");
+
+
     }
 }
