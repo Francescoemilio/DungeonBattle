@@ -10,8 +10,8 @@ public class Eroe extends Personaggio {
 	private static final int MAX_VITA = 250;
 	private static final int ATTACCO_BASE = 20;
 
-	public Eroe(String nome,  Oggetto arma, int nPozioni) {
-		super(nome, MAX_VITA, ATTACCO_BASE);
+	public Eroe(String nome, int maxHealth, int attaccoBase, Oggetto arma, int nPozioni) {
+		super(nome, maxHealth, attaccoBase); 
 		oggetto = arma;
 		o = new ArrayList<Oggetto>(nPozioni);
 		System.out.println(o.size() + "    " + nPozioni);
@@ -27,14 +27,9 @@ public class Eroe extends Personaggio {
 	}
 
 	public Pozione getPozione() {
-		if(o.isEmpty())
-			return null;
-		else
-		{
-			Pozione pozione = (Pozione) o.getFirst();
-			o.removeFirst();
-			return pozione;
-		}
+		Pozione pozione = (Pozione) o.get(0);
+		o.remove(0);
+		return pozione;
 
 	}
 
@@ -46,7 +41,12 @@ public class Eroe extends Personaggio {
 	public String toString() {
 		return "Eroe [oggetto=" + oggetto + ", o=" + o + "]";
 	}
-
-
+	
+	public void stampaInventario() {
+		for(int i=0; i<o.size();i++) {
+			o.get(i).stampa();
+			System.out.println("---------");
+		}
+	}
 
 }

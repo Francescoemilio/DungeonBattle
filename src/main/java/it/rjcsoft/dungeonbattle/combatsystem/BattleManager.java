@@ -234,7 +234,7 @@ public class BattleManager {
 
             // Pausa per leggibilità
             try {
-                Thread.sleep(1000);
+                Thread.sleep(250);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
