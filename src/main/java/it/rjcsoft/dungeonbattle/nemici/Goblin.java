@@ -7,14 +7,27 @@ import it.rjcsoft.dungeonbattle.personaggi.Nemico;
 public class Goblin extends Nemico {
 
     private static final int MAX_VITA = 80;
-    private static final int ATTACCO_BASE = 10;
+    private static final int ATTACCO_BASE = 15;
 
     public Goblin(String nome) {
         super("GOBLIN", MAX_VITA, ATTACCO_BASE);
     }
 
     @Override
-    public void sprite() {
-        System.out.println("GOBLIN");
+    public void sprite(){
+
+                System.out.println("             ,      ,");
+                System.out.println("            /(.-\"\"-.)\\");
+                System.out.println("        |\\   /      %   /|");
+                System.out.println("        | \\ / =.  .= % / |");
+                System.out.println("        \\(     o  o   / )/");
+                System.out.println("         \\_, '-/  \\-' ,_/");
+                System.out.println("           /   \\__/   ) ");
+                System.out.println("           ! %__/\\__/ /");
+                System.out.println("         ___!  %|--|/ /___");
+                System.out.println("       /`    !       /    `\\");
+                System.out.println("      /       '----'       \\");
+
+
     }
 }
