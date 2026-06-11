@@ -145,7 +145,7 @@ public class BattleManager {
             else
                 System.out.println("Ti sei curato di " + pozione.getCura() + " punti!");
             try {
-                Thread.sleep(500);
+                Thread.sleep(200);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
