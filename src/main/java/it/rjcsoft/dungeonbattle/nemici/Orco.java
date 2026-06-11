@@ -6,9 +6,10 @@ public class Orco extends Nemico {
 
     private static final int MAX_VITA = 150;
     private static final int ATTACCO_BASE = 30;
+    private static final String NOME = "ORCO";
 
-    public Orco(String nome) {
-        super("ORCO", MAX_VITA, ATTACCO_BASE);
+    public Orco() {
+        super(NOME, MAX_VITA, ATTACCO_BASE);
     }
 
     @Override

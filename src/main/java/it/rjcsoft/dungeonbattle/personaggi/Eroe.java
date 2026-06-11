@@ -1,7 +1,7 @@
 package it.rjcsoft.dungeonbattle.personaggi;
 
-import it.rjcsoft.dungeonbattle.oggetti.Oggetto;
-import it.rjcsoft.dungeonbattle.oggetti.Pozione;
+import it.rjcsoft.dungeonbattle.oggetti.*;
+
 import java.util.ArrayList;
 
 public class Eroe extends Personaggio {
@@ -10,9 +10,9 @@ public class Eroe extends Personaggio {
 	private static final int MAX_VITA = 250;
 	private static final int ATTACCO_BASE = 20;
 
-	public Eroe(String nome,  Oggetto arma, int nPozioni) {
+	public Eroe(String nome,  int nPozioni) {
 		super(nome ,MAX_VITA,ATTACCO_BASE);
-		oggetto = arma;
+		oggetto = new Pugno();
 		o = new ArrayList<Oggetto>(nPozioni);
 		System.out.println(o.size() + "    " + nPozioni);
 		for (int i = 0; i < nPozioni; i++) {
@@ -22,7 +22,7 @@ public class Eroe extends Personaggio {
 
 	public void stampa() {
 		for (int i = 0; i < 10; i++) {
-			o.get(i).stampa();
+			System.out.println(o.get(i).toString());
 		}
 	}
 
