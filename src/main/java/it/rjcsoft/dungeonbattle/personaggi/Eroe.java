@@ -26,7 +26,7 @@ public class Eroe extends Personaggio {
 
 	public Pozione getPozione() {
 		Pozione pozione = (Pozione) o.get(0);
-		o.remove(0);
+		//o.remove(0);
 		return pozione;
 
 	}

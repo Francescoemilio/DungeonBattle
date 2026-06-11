@@ -87,22 +87,22 @@ public class Dungeon {
         };
 
         generaNemici(quantita);
-
+        int scontriVinti = 0;
         while(eroe.getHealth()>0 || nemici.get(quantita - 1) !=null){
 
             System.out.println(" ");
-            for(int i=0; i<quantita; i++) {
-                System.out.println("eroe : "+eroe.toString());
-                BattleManager battle = new BattleManager(nemici.get(i),eroe);
+            System.out.println("eroe : "+eroe.toString());
+            BattleManager battle = new BattleManager(nemici.getFirst(),eroe);
             battle.iniziaCombattimento();
             try {
                 TimeUnit.SECONDS.sleep(5); 
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
-            if(eroe.getHealth()>0)
-            nemici.remove(i);
-            System.out.println("Hai vinto il "+i+" scontro");
+            if(eroe.getHealth()>0) {
+                scontriVinti += 1;
+                nemici.removeFirst();
+                System.out.println("Hai vinto il " + scontriVinti + " scontro");
             }
         }
         if(eroe.getHealth()>0) {
