@@ -3,12 +3,9 @@ package it.rjcsoft.dungeonbattle.dungeon;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
-
 import it.rjcsoft.dungeonbattle.combatsystem.BattleManager;
 import it.rjcsoft.dungeonbattle.oggetti.Arma;
 import it.rjcsoft.dungeonbattle.personaggi.*;
-// import eroe
-// import battle manager
 import it.rjcsoft.dungeonbattle.nemici.Goblin;
 import it.rjcsoft.dungeonbattle.nemici.Orco;
 import it.rjcsoft.dungeonbattle.nemici.Scheletro;
@@ -19,7 +16,6 @@ public class Dungeon {
     private Nemico[] listaNemici;
     private final Scanner input = new Scanner(System.in);
     private Eroe eroe;
-    //private BattleManager battle;
 
     public Dungeon() {
         nemici = new ArrayList<>();
@@ -33,7 +29,6 @@ public class Dungeon {
         listaNemici[6] = new Orco("ORCO", 150, 30);
         listaNemici[7] = new Goblin("GOBLIN", 100,15);
         listaNemici[8] = new Scheletro("SCHELETRO", 80,10);
-        //this.battle = new BattleManager();
         //è UNA COSTANTE?
     }
 
@@ -88,10 +83,9 @@ public class Dungeon {
 
         generaNemici(quantita);
 
-        while(eroe.getHealth()>0 || nemici.get(quantita - 1) !=null){
-
+        while(eroe.getHealth()>0 && !nemici.isEmpty()){
+            int counterScontri=0;
             System.out.println(" ");
-            for(int i=0; i<quantita; i++) {
                 System.out.println("eroe : "+eroe.toString());
                 BattleManager battle = new BattleManager(nemici.get(i),eroe);
             battle.iniziaCombattimento();
@@ -101,10 +95,11 @@ public class Dungeon {
                 Thread.currentThread().interrupt();
             }
             if(eroe.getHealth()>0)
-            nemici.remove(i);
-            System.out.println("Hai vinto il "+i+" scontro");
+            nemici.removeFirst();
+            counterScontri+=1;
+            System.out.println("Hai vinto il "+counterScontri+" scontro");
             }
-        }
+
         if(eroe.getHealth()>0) {
             System.out.println(" ");
             System.out.println("HAI VINTO TUTTI GLI SCONTRI");
@@ -113,7 +108,7 @@ public class Dungeon {
             System.out.println("HAI PERSO LA BATTAGLIA");
         }
         try {
-            TimeUnit.SECONDS.sleep(5); 
+            TimeUnit.SECONDS.sleep(5);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
