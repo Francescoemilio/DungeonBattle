@@ -9,20 +9,29 @@ import java.util.Scanner;
 public class BattleManager {
     private Nemico nemico;
     private Eroe eroe;
-    final int COSTANTE_ATTACCO = 10;
-    final float COSTANTE_DIFESA=0.7f;
+    private final int COSTANTE_ATTACCO = 10;
+    private boolean mossaSpeciale;
+    private final int VITA_FINITA = 0;
 
     public BattleManager(Nemico nemico, Eroe eroe) {
         this.nemico = nemico;
         this.eroe = eroe;
+        mossaSpeciale = true;
     }
 
     private int tiraDado() {
         return (int) (Math.random() * 20) + 1;
     }
 
-    private void battleAttack(Eroe eroe, Nemico nemico) {
-        int risultatoDado = tiraDado();
+    private void battleAttack(Eroe eroe, Nemico nemico,boolean specialMove) {
+        int risultatoDado;
+        if(specialMove)
+        {
+            risultatoDado = 20;
+            this.mossaSpeciale = false;
+        }
+        else
+            risultatoDado = tiraDado();
         System.out.println("\n--- TUO ATTACCO ---");
         System.out.println("Tiro dado: " + risultatoDado);
 
@@ -42,6 +51,8 @@ public class BattleManager {
         
         int nuovoHealth = (nemico.getHealth() - colpo);//no
         nemico.setHealth(nuovoHealth);
+        if(nemico.getHealth() < VITA_FINITA)
+            nemico.setHealth(VITA_FINITA);
         System.out.println("Salute del nemico: " + nemico.getHealth());
     }
 
@@ -63,16 +74,13 @@ public class BattleManager {
             colpo = nemico.getAttacco_base() * (risultatoDado / COSTANTE_ATTACCO);
         }
 
-        // Applica la difesa belli i commenti di chat
-        colpo -= difesa;
-        if (colpo < 0) {
-            colpo = 0;
-            System.out.println("Hai parato completamente l'attacco!");
-        }
+
 
         System.out.println("Danno subito: " +  colpo);
-        int nuovoHealth = eroe.getHealth() - colpo;
-        eroe.setHealth(nuovoHealth);
+
+        eroe.setHealth(eroe.getHealth()-colpo);
+        if(eroe.getHealth() <VITA_FINITA)
+            eroe.setHealth(VITA_FINITA);
         System.out.println("Tua salute: " + eroe.getHealth());
     }
 
@@ -94,7 +102,7 @@ public class BattleManager {
 
     private void turno() {
         int difesa = 0;
-        int scelta = -1;
+        int scelta;
         Scanner sc = new Scanner(System.in);
 
         // Mostra stato attuale GEMINI O CHAT?
@@ -105,7 +113,7 @@ public class BattleManager {
 
         // Scegli azione
         do {
-            System.out.print("\nCosa vuoi fare?\n1: Attacca | 2: Difendi | 3: Usa oggetto\nScelta: ");
+            System.out.print("\nCosa vuoi fare?\n1: Attacca | 2: Usa mossa speciale | 3: Usa oggetto\nScelta: ");
             scelta = sc.nextInt();
             if (scelta < 1 || scelta > 3) {
                 System.out.println("Scelta non valida! Riprova.");
@@ -115,12 +123,13 @@ public class BattleManager {
         // Esegui azione
         switch (scelta) {
             case 1:
-                battleAttack(eroe, nemico);
+                battleAttack(eroe, nemico, false);
                 break;
             case 2:
-                difesa = (int)(COSTANTE_DIFESA * tiraDado());//Corretto
-                System.out.println("\n--- DIFESA ---");
-                System.out.println("Punti difesa: " + difesa);
+                if(this.mossaSpeciale)
+                    battleAttack(eroe, nemico, true);
+                else
+                    System.out.println("Puoi usare la mossa speciale una sola volta per round");
                 break;
             case 3:
                 usaOggetto();
@@ -128,7 +137,7 @@ public class BattleManager {
         }
 
         // Turno del nemico (solo se è ancora vivo)
-        if (nemico.getHealth() > 0) {
+        if (nemico.getHealth() > VITA_FINITA) {
             nemicoAttack(difesa);
         }
     }
@@ -149,7 +158,7 @@ public class BattleManager {
 
         // Risultato finale
         System.out.println("\n========== FINE COMBATTIMENTO ==========");
-        if (eroe.getHealth() <= 0) {
+        if (eroe.getHealth() <= VITA_FINITA) {
             System.out.println(" GAME OVER! Sei stato sconfitto... ");
         } else {
             System.out.println(" VITTORIA! Hai sconfitto il nemico! ");

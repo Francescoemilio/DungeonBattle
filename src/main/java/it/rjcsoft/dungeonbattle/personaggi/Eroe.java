@@ -25,9 +25,14 @@ public class Eroe extends Personaggio {
 	}
 
 	public Pozione getPozione() {
-		Pozione pozione = (Pozione) o.get(0);
-		o.remove(0);
-		return pozione;
+		if(o.isEmpty())
+			return null;
+		else
+		{
+			Pozione pozione = (Pozione) o.getFirst();
+			o.removeFirst();
+			return pozione;
+		}
 
 	}
 
@@ -39,5 +44,7 @@ public class Eroe extends Personaggio {
 	public String toString() {
 		return "Eroe [oggetto=" + oggetto + ", o=" + o + "]";
 	}
+
+
 
 }
