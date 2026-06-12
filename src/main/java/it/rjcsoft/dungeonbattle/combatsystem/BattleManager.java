@@ -108,7 +108,7 @@ public class BattleManager {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-        System.out.println("Hai inflitto" + colpo + "danni.");
+        System.out.println("Hai inflitto" + colpo + " danni.");
 
         int nuovoHealth = (nemico.getHealth() - colpo);//no
         nemico.setHealth(nuovoHealth);
@@ -335,9 +335,7 @@ public class BattleManager {
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
-            this.forziere();
         }
-
         System.out.println("\n========== FINE COMBATTIMENTO ==========");
         if (eroe.getHealth() <= VITA_FINITA) {
             System.out.println(" GAME OVER! Sei stato sconfitto... ");
@@ -345,5 +343,6 @@ public class BattleManager {
             System.out.println(" VITTORIA! Hai sconfitto il nemico! ");
         }
         System.out.println("=========================================");
+        this.forziere();
     }
 }
