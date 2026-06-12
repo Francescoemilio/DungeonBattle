@@ -1,6 +1,6 @@
 package it.rjcsoft.dungeonbattle.oggetti;
 
-import it.rjcsoft.dungeonbattle.personaggi.Personaggio;//non serve che lo scrivo cosa non va
+
 
 public abstract class Oggetto {
 	private String nome;
@@ -21,5 +21,18 @@ public abstract class Oggetto {
 
 	public String getNome() {
 		return nome;
+	}
+
+	public boolean equals(Object o)
+	{
+		if(o == null)
+			return false;
+		else if(!(o instanceof Oggetto))
+			return false;
+		else
+		{
+			Oggetto oggetto = (Oggetto) o;
+			return this.nome.equals(oggetto.getNome());
+		}
 	}
 }

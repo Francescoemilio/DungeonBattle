@@ -1,6 +1,8 @@
 package it.rjcsoft.dungeonbattle.combatsystem;
 
 import it.rjcsoft.dungeonbattle.nemici.*;
+import it.rjcsoft.dungeonbattle.oggetti.Arma;
+import it.rjcsoft.dungeonbattle.oggetti.Oggetto;
 import it.rjcsoft.dungeonbattle.personaggi.Nemico;
 import it.rjcsoft.dungeonbattle.oggetti.Pozione;
 import it.rjcsoft.dungeonbattle.personaggi.Eroe;
@@ -20,22 +22,47 @@ public class BattleManager {
         mossaSpeciale = true;
     }
 
-    private void stampaLegenda(){
-            System.out.println("--- LEGENDA ---");
-            System.out.println(" ");
-            System.out.println("--- DIFFICOLTA' ---");
-            System.out.println("FACILE     = 3 NEMICI");
-            System.out.println("MEDIA      = 6 NEMICI");
-            System.out.println("DIFFICILE  = 9 NEMICI");
-            System.out.println(" ");
-            System.out.println("--- INFO OGGETTI ALL'AVVIO ---");
-            System.out.println(" 5 POZIONI ( AGGIUNGONO OGNUNA 50 PUNTI VITA ) ");
-            turno();
 
-    }
 
     private int tiraDado() {
         return (int) (Math.random() * 20) + 1;
+    }
+
+    private void forziere(){
+        int risultatoDado = tiraDado();
+
+        if(risultatoDado > 14){
+            System.out.println("Hai trovato un forziere!");
+
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+
+            int dadoArmaNuova = tiraDado();
+            if(dadoArmaNuova > 5 && dadoArmaNuova < 16){
+
+                    System.out.println("Hai trovato una pozione!");
+
+                }else if(dadoArmaNuova>16){
+                    System.out.println("Hai trovato un'arma...");
+                    int dadoArma= tiraDado();
+                    if(dadoArma<10){
+                        System.out.println("Hai trovato una daga!");
+
+                    }else if(dadoArma<=15){
+                        System.out.println("Hai trovato una spada!");
+
+                    }else{
+                        System.out.println("Hai trovato un'ascia!");
+
+                    }
+
+            }else{
+                System.out.println("E' vuota...");
+            }
+        }
     }
 
     private void battleAttack(Eroe eroe, Nemico nemico,boolean specialMove) {
@@ -140,16 +167,35 @@ public class BattleManager {
         }
     }
 
-    private void usaOggetto() {
-        System.out.println("\n--- USA OGGETTO ---");
+    private void usaOggetto(Oggetto oggetto) {
+        if(oggetto == null)
+        {
+            System.out.println("Oggetto  non presente nell'inventario");
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
 
-        Pozione pozione = eroe.getPozione();
-        if(pozione == null)
-            System.out.println("Hai finito le pozioni!");
+        else if(oggetto instanceof Arma)
+        {
+            this.eroe.setArma((Arma)oggetto);
+            System.out.println("Equipaggiata la nuova arma!");
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
         else
         {
+
+            Pozione pozione = (Pozione) oggetto;
+
+
             int differenzaVita = eroe.getMaxHealth()-eroe.getHealth();
-            eroe.setHealth(eroe.getHealth() + pozione.getCura());
+            eroe.setHealth(eroe.getHealth() + Pozione.getCura());
 
             if(eroe.getHealth() > eroe.getMaxHealth())
             {
@@ -157,7 +203,7 @@ public class BattleManager {
                 eroe.setHealth(eroe.getMaxHealth());
             }
             else
-                System.out.println("Ti sei curato di " + pozione.getCura() + " punti!");
+                System.out.println("Ti sei curato di " + Pozione.getCura() + " punti!");
             try {
                 Thread.sleep(200);
             } catch (InterruptedException e) {
@@ -171,6 +217,7 @@ public class BattleManager {
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
+
 
         }
     }
@@ -192,7 +239,7 @@ public class BattleManager {
         System.out.println("==========================================");
 
         do {
-            System.out.print("\nCosa vuoi fare?\n1: Attacca | 2: Usa mossa speciale | 3: Usa oggetto | 4: Legenda\nScelta: ");
+            System.out.print("\nCosa vuoi fare?\n1: Attacca | 2: Usa mossa speciale | 3: Usa oggetto");
             scelta = sc.nextInt();
             if (scelta < 1 || scelta > 4) {
                 System.out.println("Scelta non valida! Riprova.");
@@ -210,16 +257,34 @@ public class BattleManager {
                     System.out.println("Puoi usare la mossa speciale una sola volta per round");
                 break;
             case 3:
-                usaOggetto();
+                visualizzaInventario();
                 break;
-            case 4:
-                stampaLegenda();
-                break;
+
         }
 
         if (nemico.getHealth() > VITA_FINITA) {
             nemicoAttack();
         }
+
+    }
+
+    public void visualizzaInventario()
+    {
+        Scanner scanner = new Scanner(System.in);
+        this.eroe.stampaInventario();
+        System.out.println("Inserire l'oggetto da utilizzare");
+        String oggettoUtilizzato = scanner.nextLine();
+        oggettoUtilizzato = oggettoUtilizzato.toUpperCase();
+        Oggetto oggettoDaUtilizzare = null;
+        for(Oggetto o : eroe.getInventario())
+        {
+            if(o.getNome().equals(oggettoUtilizzato))
+            {
+                oggettoDaUtilizzare = o;
+                break;
+            }
+        }
+        usaOggetto(oggettoDaUtilizzare);
     }
 
     public void iniziaCombattimento() {
