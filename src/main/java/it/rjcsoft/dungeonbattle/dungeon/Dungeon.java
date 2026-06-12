@@ -48,7 +48,7 @@ public class Dungeon {
             
 
         }
-        int random=(int)(Math.random());
+        int random=(int)(Math.random()*2);
         Boss b;
         if(random == 0){
             b=new Drago();
@@ -99,7 +99,7 @@ public class Dungeon {
 
         generaNemici(quantita);
         int counterScontri=0;
-        while(eroe.getHealth()>0 && nemici.getFirst() instanceof Boss){
+        while(eroe.getHealth()>0 && !(nemici.getFirst() instanceof Boss)){
             System.out.println(" ");
             BattleManager battle = new BattleManager(nemici.getFirst(),eroe);
             battle.iniziaCombattimento();
@@ -113,19 +113,20 @@ public class Dungeon {
             counterScontri+=1;
             System.out.println("Hai vinto il "+counterScontri+" scontro");
             }
-
-        if(eroe.getHealth()>0) {
-            System.out.println(" ");
-            System.out.println("HAI VINTO TUTTI GLI SCONTRI");
-        }else {
-            System.out.println(" ");
-            System.out.println("HAI PERSO LA BATTAGLIA");
-        }
+        
         try {
             TimeUnit.SECONDS.sleep(5);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
+        
+        if(nemici.getFirst() instanceof Boss && eroe.getHealth() > 0) {
+            //combattiBoss();
+        }else {
+            System.out.println(" ");
+            System.out.println("HAI PERSO LA BATTAGLIA");
+        }
+       
         System.out.println(" ");
         System.out.println("Nuova Partita?");
         System.out.println(" ");
