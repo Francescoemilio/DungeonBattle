@@ -1,9 +1,8 @@
 package it.rjcsoft.dungeonbattle.combatsystem;
 
+import it.rjcsoft.dungeonbattle.personaggi.*;
 import it.rjcsoft.dungeonbattle.nemici.*;
-import it.rjcsoft.dungeonbattle.personaggi.Nemico;
-import it.rjcsoft.dungeonbattle.oggetti.Pozione;
-import it.rjcsoft.dungeonbattle.personaggi.Eroe;
+import it.rjcsoft.dungeonbattle.oggetti.*;
 
 import java.util.Scanner;
 
@@ -38,7 +37,44 @@ public class BattleManager {
         return (int) (Math.random() * 20) + 1;
     }
 
-    public void battleAttack(Eroe eroe, Nemico nemico,boolean specialMove) {
+    private void forziere(){
+        int risultatoDado = tiraDado();
+
+        if(risultatoDado > 14){
+            System.out.println("Hai trovato un forziere!");
+
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+
+            int dadoArmaNuova = tiraDado();
+            if(dadoArmaNuova > 5){
+                if(dadoArmaNuova>5 && dadoArmaNuova<16){
+                    System.out.println("Hai trovato una pozione!");
+
+                }else if(dadoArmaNuova>16){
+                    System.out.println("Hai trovato un'arma...");
+                    int dadoArma= tiraDado();
+                    if(dadoArma<10){
+                        System.out.println("Hai trovato una daga!");
+
+                    }else if(dadoArma<=15){
+                        System.out.println("Hai trovato una spada!");
+
+                    }else{
+                        System.out.println("Hai trovato un'ascia!");
+
+                    }
+                }
+            }else{
+                System.out.println("E' vuota...");
+            }
+        }
+    }
+
+    private void battleAttack(Eroe eroe, Nemico nemico,boolean specialMove) {
         int risultatoDado;
         if(specialMove)
         {
@@ -60,7 +96,7 @@ public class BattleManager {
             System.out.println("COLPO CRITICO!");
             colpo = eroe.getAttaccoBase() * 3;
         } else {
-            colpo = (int) (eroe.getAttaccoBase() * ((double) risultatoDado / COSTANTE_ATTACCO));
+            colpo = (int) (nemico.getAttaccoBase() * ((double) risultatoDado / COSTANTE_ATTACCO));
         }
 
         try {
@@ -223,6 +259,13 @@ public class BattleManager {
     }
 
     public void iniziaCombattimento() {
+        System.out.println("Benvenuto" + eroe.getNome() + "nel dungeon...");
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
         System.out.println("\n INIZIA IL COMBATTIMENTO! \n");
 
         nemico.sprite();
