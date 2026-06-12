@@ -241,33 +241,35 @@ public class BattleManager {
         System.out.println("==========================================");
 
         do {
+
             System.out.println("\nCosa vuoi fare?\n1: Attacca | 2: Usa mossa speciale | 3: Usa oggetto");
             scelta = sc.nextInt();
             if (scelta < 1 || scelta > 4) {
                 System.out.println("Scelta non valida! Riprova.");
             }
-        } while (scelta < 1 || scelta > 4);
 
-        switch (scelta) {
-            case 1:
-                battleAttack(eroe, nemico, false);
-                break;
-            case 2:
-                if(this.mossaSpeciale)
-                    battleAttack(eroe, nemico, true);
-                else
-                    System.out.println("Puoi usare la mossa speciale una sola volta per round");
-                break;
-            case 3:
-                visualizzaInventario();
-                break;
 
+            switch (scelta) {
+                case 1:
+                    battleAttack(eroe, nemico, false);
+                    break;
+                case 2:
+                    if (this.mossaSpeciale)
+                        battleAttack(eroe, nemico, true);
+                    else
+                        System.out.println("Puoi usare la mossa speciale una sola volta per round");
+                    break;
+                case 3:
+                    visualizzaInventario();
+                    break;
+
+            }
+
+            if (nemico.getHealth() > VITA_FINITA) {
+                nemicoAttack();
+            }
         }
-
-        if (nemico.getHealth() > VITA_FINITA) {
-            nemicoAttack();
-        }
-
+        while(scelta != 1 && scelta != 2 && scelta != 3);
     }
 
     public void visualizzaInventario()
