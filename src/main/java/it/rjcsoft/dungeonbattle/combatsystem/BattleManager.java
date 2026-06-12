@@ -60,7 +60,7 @@ public class BattleManager {
             System.out.println("COLPO CRITICO!");
             colpo = eroe.getAttaccoBase() * 3;
         } else {
-            colpo = (int) (nemico.getAttaccoBase() * ((double) risultatoDado / COSTANTE_ATTACCO));
+            colpo = (int) (eroe.getAttaccoBase() * ((double) risultatoDado / COSTANTE_ATTACCO));
         }
 
         try {
