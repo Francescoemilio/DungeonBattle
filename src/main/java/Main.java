@@ -6,7 +6,5 @@ public class Main {
     public static void main(String args[]) throws IOException{
         Dungeon dungeon = new Dungeon();
         dungeon.start();
-        // commit prova
-        // commit AleApo
     }
 }

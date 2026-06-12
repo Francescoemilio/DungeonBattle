@@ -101,7 +101,7 @@ public class BattleManager {
             }
         }
 
-        if (risultatoDado < 3) { //scheletro
+        if (risultatoDado < 3) {
             System.out.println("Il nemico ha mancato!");
             return;
         }
