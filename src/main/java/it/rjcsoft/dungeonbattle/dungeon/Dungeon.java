@@ -98,10 +98,13 @@ public class Dungeon {
         };
 
         generaNemici(quantita);
+
         int counterScontri=0;
+        
+        BattleManager battle = null;
         while(eroe.getHealth()>0 && !(nemici.getFirst() instanceof Boss)){
             System.out.println(" ");
-            BattleManager battle = new BattleManager(nemici.getFirst(),eroe);
+            battle = new BattleManager(nemici.getFirst(),eroe);
             battle.iniziaCombattimento();
             try {
                 TimeUnit.SECONDS.sleep(5); 
@@ -121,10 +124,15 @@ public class Dungeon {
         }
         
         if(nemici.getFirst() instanceof Boss && eroe.getHealth() > 0) {
-            //combattiBoss();
-        }else {
+            battle.battleAttack(eroe, nemici.getFirst(), true);
+          }else if(eroe.getHealth() < 0) {
             System.out.println(" ");
             System.out.println("HAI PERSO LA BATTAGLIA");
+        }
+
+        if(eroe.getHealth() > 0 ) {
+            System.out.println(" ");
+            System.out.println("HAI VINTO LA BATTAGLIA");
         }
        
         System.out.println(" ");

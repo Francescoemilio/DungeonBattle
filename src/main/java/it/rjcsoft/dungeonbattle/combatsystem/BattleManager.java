@@ -38,7 +38,7 @@ public class BattleManager {
         return (int) (Math.random() * 20) + 1;
     }
 
-    private void battleAttack(Eroe eroe, Nemico nemico,boolean specialMove) {
+    public void battleAttack(Eroe eroe, Nemico nemico,boolean specialMove) {
         int risultatoDado;
         if(specialMove)
         {
