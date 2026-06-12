@@ -1,10 +1,8 @@
 package it.rjcsoft.dungeonbattle.combatsystem;
 
 import it.rjcsoft.dungeonbattle.nemici.*;
-import it.rjcsoft.dungeonbattle.oggetti.Arma;
-import it.rjcsoft.dungeonbattle.oggetti.Oggetto;
+import it.rjcsoft.dungeonbattle.oggetti.*;
 import it.rjcsoft.dungeonbattle.personaggi.Nemico;
-import it.rjcsoft.dungeonbattle.oggetti.Pozione;
 import it.rjcsoft.dungeonbattle.personaggi.Eroe;
 
 import java.util.Scanner;
@@ -44,19 +42,23 @@ public class BattleManager {
             if(dadoArmaNuova > 5 && dadoArmaNuova < 16){
 
                     System.out.println("Hai trovato una pozione!");
-
+                    Pozione pozione= new Pozione();
+                    eroe.aggiungiInventario(pozione);
                 }else if(dadoArmaNuova>16){
                     System.out.println("Hai trovato un'arma...");
                     int dadoArma= tiraDado();
                     if(dadoArma<10){
                         System.out.println("Hai trovato una daga!");
-
+                        Daga daga= new Daga();
+                        eroe.aggiungiInventario(daga);
                     }else if(dadoArma<=15){
                         System.out.println("Hai trovato una spada!");
-
+                        Spada spada = new Spada();
+                        eroe.aggiungiInventario(spada);
                     }else{
                         System.out.println("Hai trovato un'ascia!");
-
+                        Ascia ascia = new Ascia();
+                        eroe.aggiungiInventario(ascia);
                     }
 
             }else{
@@ -181,7 +183,7 @@ public class BattleManager {
         else if(oggetto instanceof Arma)
         {
             this.eroe.setArma((Arma)oggetto);
-            System.out.println("Equipaggiata la nuova arma!");
+            System.out.println("Equipaggiata la nuova arma! E sostituita quella attuale");
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
@@ -239,7 +241,7 @@ public class BattleManager {
         System.out.println("==========================================");
 
         do {
-            System.out.print("\nCosa vuoi fare?\n1: Attacca | 2: Usa mossa speciale | 3: Usa oggetto");
+            System.out.println("\nCosa vuoi fare?\n1: Attacca | 2: Usa mossa speciale | 3: Usa oggetto");
             scelta = sc.nextInt();
             if (scelta < 1 || scelta > 4) {
                 System.out.println("Scelta non valida! Riprova.");
@@ -281,6 +283,7 @@ public class BattleManager {
             if(o.getNome().equals(oggettoUtilizzato))
             {
                 oggettoDaUtilizzare = o;
+                eroe.getInventario().remove(o);
                 break;
             }
         }

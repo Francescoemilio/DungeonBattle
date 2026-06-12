@@ -55,4 +55,9 @@ public class Eroe extends Personaggio {
 	{
 		return this.arma;
 	}
+
+	public void aggiungiInventario(Oggetto oggetto)
+	{
+		o.add(oggetto);
+	}
 }
