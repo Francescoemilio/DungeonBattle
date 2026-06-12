@@ -5,9 +5,10 @@ import it.rjcsoft.dungeonbattle.personaggi.Nemico;
 public class Scheletro extends Nemico {
     private static final int MAX_VITA = 100;
     private static final int ATTACCO_BASE = 15;
+    private static final String NOME = "SCHELETRO";
 
-    public Scheletro(String nome) {
-        super("SCHELETRO", MAX_VITA, ATTACCO_BASE);
+    public Scheletro() {
+        super(NOME, MAX_VITA, ATTACCO_BASE);
     }
 
     @Override

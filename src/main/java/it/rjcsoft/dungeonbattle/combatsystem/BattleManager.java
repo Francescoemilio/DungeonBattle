@@ -209,7 +209,6 @@ public class BattleManager {
         System.out.println("Salute nemico: " + nemico.getHealth());
         System.out.println("==========================================");
 
-        // Scegli azione
         do {
             System.out.print("\nCosa vuoi fare?\n1: Attacca | 2: Usa mossa speciale | 3: Usa oggetto | 4: Legenda\nScelta: ");
             scelta = sc.nextInt();
@@ -218,7 +217,6 @@ public class BattleManager {
             }
         } while (scelta < 1 || scelta > 4);
 
-        // Esegui azione
         switch (scelta) {
             case 1:
                 battleAttack(eroe, nemico, false);
@@ -237,7 +235,6 @@ public class BattleManager {
                 break;
         }
 
-        // Turno del nemico (solo se è ancora vivo)
         if (nemico.getHealth() > VITA_FINITA) {
             nemicoAttack();
         }
@@ -251,7 +248,6 @@ public class BattleManager {
         while (nemico.getHealth() > 0 && eroe.getHealth() > 0) {
             turno();
 
-            // Pausa per leggibilità
             try {
                 Thread.sleep(250);
             } catch (InterruptedException e) {
@@ -259,7 +255,6 @@ public class BattleManager {
             }
         }
 
-        // Risultato finale
         System.out.println("\n========== FINE COMBATTIMENTO ==========");
         if (eroe.getHealth() <= VITA_FINITA) {
             System.out.println(" GAME OVER! Sei stato sconfitto... ");

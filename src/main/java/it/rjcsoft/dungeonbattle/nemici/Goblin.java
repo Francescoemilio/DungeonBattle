@@ -8,9 +8,10 @@ public class Goblin extends Nemico {
 
     private static final int MAX_VITA = 80;
     private static final int ATTACCO_BASE = 15;
+    private static final String NOME = "GOBLIN";
 
-    public Goblin(String nome) {
-        super("GOBLIN", MAX_VITA, ATTACCO_BASE);
+    public Goblin() {
+        super(NOME, MAX_VITA, ATTACCO_BASE);
     }
 
     @Override

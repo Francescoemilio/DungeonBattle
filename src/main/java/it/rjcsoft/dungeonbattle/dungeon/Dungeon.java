@@ -7,14 +7,17 @@ import java.util.concurrent.TimeUnit;
 import it.rjcsoft.dungeonbattle.combatsystem.BattleManager;
 import it.rjcsoft.dungeonbattle.oggetti.Arma;
 import it.rjcsoft.dungeonbattle.personaggi.*;
+import it.rjcsoft.dungeonbattle.nemici.Boss;
+import it.rjcsoft.dungeonbattle.nemici.Drago;
 import it.rjcsoft.dungeonbattle.nemici.Goblin;
+import it.rjcsoft.dungeonbattle.nemici.MindFlayer;
 import it.rjcsoft.dungeonbattle.nemici.Orco;
 import it.rjcsoft.dungeonbattle.nemici.Scheletro;
 
 
 public class Dungeon {
     private ArrayList<Nemico> nemici;
-    private Nemico[] listaNemici;
+    private ArrayList<Nemico> listaNemici;
     private final Scanner input = new Scanner(System.in);
     private Eroe eroe;
     private final int NPOZIONI_INIZIALI = 4;
@@ -25,32 +28,40 @@ public class Dungeon {
 
     public Dungeon() {
         nemici = new ArrayList<>();
-        listaNemici = new Nemico[9];
+        listaNemici = new ArrayList<>();
         //è UNA COSTANTE?
     }
 
 
     public void generaNemici(int quantita) {
 
-        listaNemici = new Nemico[9];
-        listaNemici[0] = new Orco("ORCO");
-        listaNemici[1] = new Goblin("GOBLIN");
-        listaNemici[2] = new Scheletro("SCHELETRO");
-        listaNemici[3] = new Orco("ORCO");
-        listaNemici[4] = new Goblin("GOBLIN");
-        listaNemici[5] = new Scheletro("SCHELETRO");
-        listaNemici[6] = new Orco("ORCO");
-        listaNemici[7] = new Goblin("GOBLIN");
-        listaNemici[8] = new Scheletro("SCHELETRO");
         for(int i = 0; i < quantita; i++) {
-            nemici.add(listaNemici[i]);
+            int random = (int) (Math.random()*3);
+            if(random==0) {
+                listaNemici.add(new Orco());
+            }
+            if(random==1) {
+                listaNemici.add(new Goblin());
+            }else{
+                listaNemici.add(new Scheletro());
+            }
+            
 
         }
+        int random=(int)(Math.random());
+        Boss b;
+        if(random == 0){
+            b=new Drago();
+        }
+        else{
+            b=new MindFlayer();    
+        }
+            listaNemici.add(b);
     }
 
     public void start()throws IOException{
         if (this.eroe == null) {
-            this.eroe = new Eroe("Francesco Barsotti", new Arma(), NPOZIONI_INIZIALI);
+            this.eroe = new Eroe("Francesco Barsotti",  NPOZIONI_INIZIALI);
         } else {
 
             this.eroe.setHealth(eroe.getMaxHealth());
@@ -88,7 +99,7 @@ public class Dungeon {
 
         generaNemici(quantita);
         int counterScontri=0;
-        while(eroe.getHealth()>0 && !nemici.isEmpty()){
+        while(eroe.getHealth()>0 && nemici.getFirst() instanceof Boss){
             System.out.println(" ");
             BattleManager battle = new BattleManager(nemici.getFirst(),eroe);
             battle.iniziaCombattimento();
