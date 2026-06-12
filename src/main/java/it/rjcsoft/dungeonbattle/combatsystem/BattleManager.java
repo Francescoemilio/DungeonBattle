@@ -69,6 +69,7 @@ public class BattleManager {
 
     private void battleAttack(Eroe eroe, Nemico nemico,boolean specialMove) {
         int risultatoDado;
+        int colpo=0;
         if(specialMove)
         {
             risultatoDado = 20;
@@ -78,26 +79,37 @@ public class BattleManager {
             risultatoDado = tiraDado();
         System.out.println("\n--- TUO ATTACCO ---");
         System.out.println("Tiro dado: " + risultatoDado);
-
-        if (risultatoDado < 4) {
-            System.out.println("Mancato!");
-            return;
-        }
-
-        int colpo;
-        if (risultatoDado == 20) {
-            System.out.println("COLPO CRITICO!");
-            colpo = eroe.getAttaccoBase() * 3;
-        } else {
-            colpo = (int) (nemico.getAttaccoBase() * ((double) risultatoDado / COSTANTE_ATTACCO));
+        if(eroe.getArma() instanceof Spada || eroe.getArma() instanceof Pugno){
+            if (risultatoDado < 4) {
+                System.out.println("Mancato!");
+                return;
+            }
+            if (risultatoDado == 20) {
+                System.out.println("COLPO CRITICO!");
+                colpo = eroe.getAttaccoBase() * 3;
+            } else {
+                colpo = (int) (nemico.getAttaccoBase() * ((double) risultatoDado / COSTANTE_ATTACCO));
+            }
+        }else if(eroe.getArma() instanceof Ascia){
+            if (risultatoDado < 12) {
+                System.out.println("Mancato!");
+                return;
+            }
+            if (risultatoDado == 20) {
+                System.out.println("COLPO CRITICO!");
+                colpo = eroe.getAttaccoBase() * 2;
+            } else {
+                colpo = (int) (nemico.getAttaccoBase() * ((double) risultatoDado / COSTANTE_ATTACCO));
+            }
         }
 
         try {
-            Thread.sleep(500);
+            Thread.sleep(200);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-        
+        System.out.println("Hai inflitto" + colpo + "danni.");
+
         int nuovoHealth = (nemico.getHealth() - colpo);//no
         nemico.setHealth(nuovoHealth);
         if(nemico.getHealth() < VITA_FINITA)
@@ -251,11 +263,29 @@ public class BattleManager {
 
             switch (scelta) {
                 case 1:
-                    battleAttack(eroe, nemico, false);
+                    if(eroe.getArma() instanceof Spada || eroe.getArma() instanceof Pugno){
+                        battleAttack(eroe, nemico, false);
+                    }else if(eroe.getArma() instanceof Ascia){
+                        battleAttack(eroe, nemico, false);
+                        if (nemico.getHealth() > VITA_FINITA) {
+                            nemicoAttack();
+                        }
+                    }else{
+                        battleAttack(eroe, nemico, false);
+                        battleAttack(eroe, nemico, false);
+                    }
                     break;
                 case 2:
-                    if (this.mossaSpeciale)
-                        battleAttack(eroe, nemico, true);
+                    if (this.mossaSpeciale){
+                        if(eroe.getArma() instanceof Spada || eroe.getArma() instanceof Pugno || eroe.getArma() instanceof Daga ){
+                            battleAttack(eroe, nemico, true);
+                        }else{
+                            battleAttack(eroe, nemico, true);
+                            if (nemico.getHealth() > VITA_FINITA) {
+                                nemicoAttack();
+                            }
+                        }
+                    }
                     else
                         System.out.println("Puoi usare la mossa speciale una sola volta per round");
                     break;
