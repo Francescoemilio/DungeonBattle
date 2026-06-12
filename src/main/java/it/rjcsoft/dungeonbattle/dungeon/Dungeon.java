@@ -33,6 +33,20 @@ public class Dungeon {
     }
 
 
+    private void stampaLegenda(){
+        System.out.println("--- LEGENDA ---");
+        System.out.println(" ");
+        System.out.println("--- DIFFICOLTA' ---");
+        System.out.println("FACILE     = " + NEMICI_FACILE  +   " NEMICI");
+        System.out.println("MEDIA      = " + NEMICI_NORMALE + " NEMICI");
+        System.out.println("DIFFICILE  = " + NEMICI_DIFFICILE + " NEMICI");
+        System.out.println(" ");
+        System.out.println("--- INFO OGGETTI ALL'AVVIO ---");
+        System.out.println(" " + NPOZIONI_INIZIALI + " POZIONI ( AGGIUNGONO OGNUNA 50 PUNTI VITA ) ");
+
+
+    }
+
     public void generaNemici(int quantita) {
 
         for(int i = 0; i < quantita; i++) {
@@ -48,6 +62,7 @@ public class Dungeon {
             
 
         }
+
         int random=(int)(Math.random());
         Boss b;
         if(random == 0){

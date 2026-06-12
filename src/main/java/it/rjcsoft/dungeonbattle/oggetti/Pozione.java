@@ -1,15 +1,15 @@
 package it.rjcsoft.dungeonbattle.oggetti;
 
 public class Pozione extends Oggetto {
-	private int cura;
 
-	public Pozione(int cura) {
+	private static int CURA = 50;
+	public Pozione() {
 		super("Pozione cura", "Pozione");
-		this.cura = cura;
+
 	}
 
-	public int getCura() {
-		return this.cura;
+	public static int getCura() {
+		return CURA;
 	}
 
 }
