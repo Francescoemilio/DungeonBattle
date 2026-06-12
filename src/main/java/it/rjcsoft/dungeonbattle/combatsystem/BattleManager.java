@@ -50,9 +50,9 @@ public class BattleManager {
             }
 
             int dadoArmaNuova = tiraDado();
-            if(dadoArmaNuova > 5){}
+            if(dadoArmaNuova > 5){
 
-
+            }
         }
     }
 
