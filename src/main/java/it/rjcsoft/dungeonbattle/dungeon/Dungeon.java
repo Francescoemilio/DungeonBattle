@@ -16,10 +16,10 @@ import it.rjcsoft.dungeonbattle.nemici.Scheletro;
 
 
 public class Dungeon {
-    private ArrayList<Nemico> nemici;
     private ArrayList<Nemico> listaNemici;
     private final Scanner input = new Scanner(System.in);
     private Eroe eroe;
+    private BattleManager battle;
     private final int NPOZIONI_INIZIALI = 4;
     private final int NEMICI_FACILE = 3;
     private final int NEMICI_NORMALE = 6;
@@ -27,25 +27,12 @@ public class Dungeon {
 
 
     public Dungeon() {
-        nemici = new ArrayList<>();
         listaNemici = new ArrayList<>();
+        eroe=null;
+        battle=null;
         //è UNA COSTANTE?
     }
 
-
-    private void stampaLegenda(){
-        System.out.println("--- LEGENDA ---");
-        System.out.println(" ");
-        System.out.println("--- DIFFICOLTA' ---");
-        System.out.println("FACILE     = " + NEMICI_FACILE  +   " NEMICI");
-        System.out.println("MEDIA      = " + NEMICI_NORMALE + " NEMICI");
-        System.out.println("DIFFICILE  = " + NEMICI_DIFFICILE + " NEMICI");
-        System.out.println(" ");
-        System.out.println("--- INFO OGGETTI ALL'AVVIO ---");
-        System.out.println(" " + NPOZIONI_INIZIALI + " POZIONI ( AGGIUNGONO OGNUNA 50 PUNTI VITA ) ");
-
-
-    }
 
     public void generaNemici(int quantita) {
 
@@ -54,7 +41,7 @@ public class Dungeon {
             if(random==0) {
                 listaNemici.add(new Orco());
             }
-            if(random==1) {
+            else if(random==1) {
                 listaNemici.add(new Goblin());
             }else{
                 listaNemici.add(new Scheletro());
@@ -62,8 +49,7 @@ public class Dungeon {
             
 
         }
-
-        int random=(int)(Math.random());
+        int random=(int)(Math.random()*2);
         Boss b;
         if(random == 0){
             b=new Drago();
@@ -75,6 +61,10 @@ public class Dungeon {
     }
 
     public void start()throws IOException{
+
+        listaNemici.clear();
+        battle = null;
+
         if (this.eroe == null) {
             this.eroe = new Eroe("Francesco Barsotti",  NPOZIONI_INIZIALI);
         } else {
@@ -113,34 +103,51 @@ public class Dungeon {
         };
 
         generaNemici(quantita);
+
         int counterScontri=0;
-        while(eroe.getHealth()>0 && nemici.getFirst() instanceof Boss){
+
+        
+        if (battle == null )
+            battle = new BattleManager(listaNemici.getFirst(),eroe);
+    
+        while(eroe.getHealth()>0 && 
+        !listaNemici.isEmpty() && (!(listaNemici.getFirst() instanceof Boss))){
+            battle = new BattleManager(listaNemici.getFirst(), eroe);
             System.out.println(" ");
-            BattleManager battle = new BattleManager(nemici.getFirst(),eroe);
             battle.iniziaCombattimento();
             try {
                 TimeUnit.SECONDS.sleep(5); 
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
-            if(eroe.getHealth()>0)
-            nemici.removeFirst();
-            counterScontri+=1;
+            if(eroe.getHealth()>0) {
+            listaNemici.removeFirst();
+            counterScontri++;
             System.out.println("Hai vinto il "+counterScontri+" scontro");
             }
-
-        if(eroe.getHealth()>0) {
-            System.out.println(" ");
-            System.out.println("HAI VINTO TUTTI GLI SCONTRI");
-        }else {
-            System.out.println(" ");
-            System.out.println("HAI PERSO LA BATTAGLIA");
         }
+        
         try {
             TimeUnit.SECONDS.sleep(5);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
+        
+        if (!listaNemici.isEmpty()
+            && listaNemici.getFirst() instanceof Boss
+            && eroe.getHealth() > 0) {
+        
+            battle = new BattleManager(listaNemici.getFirst(), eroe);
+            battle.iniziaCombattimento();
+        
+            if (eroe.getHealth() > 0) {
+                System.out.println("\nHAI VINTO LA BATTAGLIA");
+            } else {
+                System.out.println("\nHAI PERSO LA BATTAGLIA");
+            }
+        }
+
+       
         System.out.println(" ");
         System.out.println("Nuova Partita?");
         System.out.println(" ");

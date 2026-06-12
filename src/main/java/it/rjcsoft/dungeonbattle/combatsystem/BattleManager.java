@@ -1,13 +1,10 @@
 package it.rjcsoft.dungeonbattle.combatsystem;
 
 import it.rjcsoft.dungeonbattle.nemici.*;
-import it.rjcsoft.dungeonbattle.oggetti.Arma;
-import it.rjcsoft.dungeonbattle.oggetti.Oggetto;
 import it.rjcsoft.dungeonbattle.personaggi.Nemico;
 import it.rjcsoft.dungeonbattle.oggetti.Pozione;
 import it.rjcsoft.dungeonbattle.personaggi.Eroe;
 
-import java.util.Locale;
 import java.util.Scanner;
 
 public class BattleManager {
@@ -27,6 +24,43 @@ public class BattleManager {
 
     private int tiraDado() {
         return (int) (Math.random() * 20) + 1;
+    }
+
+    private void forziere(){
+        int risultatoDado = tiraDado();
+
+        if(risultatoDado > 14){
+            System.out.println("Hai trovato un forziere!");
+
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+
+            int dadoArmaNuova = tiraDado();
+            if(dadoArmaNuova > 5){
+                if(dadoArmaNuova>5 && dadoArmaNuova<16){
+                    System.out.println("Hai trovato una pozione!");
+
+                }else if(dadoArmaNuova>16){
+                    System.out.println("Hai trovato un'arma...");
+                    int dadoArma= tiraDado();
+                    if(dadoArma<10){
+                        System.out.println("Hai trovato una daga!");
+
+                    }else if(dadoArma<=15){
+                        System.out.println("Hai trovato una spada!");
+
+                    }else{
+                        System.out.println("Hai trovato un'ascia!");
+
+                    }
+                }
+            }else{
+                System.out.println("E' vuota...");
+            }
+        }
     }
 
     private void battleAttack(Eroe eroe, Nemico nemico,boolean specialMove) {
@@ -51,7 +85,7 @@ public class BattleManager {
             System.out.println("COLPO CRITICO!");
             colpo = eroe.getAttaccoBase() * 3;
         } else {
-            colpo = (int) ((eroe.getAttaccoBase() + eroe.getArma().getAttacco()) * ((double) risultatoDado / COSTANTE_ATTACCO));
+            colpo = (int) (nemico.getAttaccoBase() * ((double) risultatoDado / COSTANTE_ATTACCO));
         }
 
         try {
