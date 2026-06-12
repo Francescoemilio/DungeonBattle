@@ -8,7 +8,7 @@ public class Eroe extends Personaggio {
 	private Oggetto oggetto;
 	private ArrayList<Oggetto> o;
 	private static final int MAX_VITA = 250;
-	private static final int ATTACCO_BASE = 1000;
+	private static final int ATTACCO_BASE = 20;
 
 	public Eroe(String nome,  int nPozioni) {
 		super(nome ,MAX_VITA,ATTACCO_BASE);
