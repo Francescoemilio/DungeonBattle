@@ -239,7 +239,7 @@ public class BattleManager {
         System.out.println("==========================================");
 
         do {
-            System.out.print("\nCosa vuoi fare?\n1: Attacca | 2: Usa mossa speciale | 3: Usa oggetto");
+            System.out.println("\nCosa vuoi fare?\n1: Attacca | 2: Usa mossa speciale | 3: Usa oggetto");
             scelta = sc.nextInt();
             if (scelta < 1 || scelta > 4) {
                 System.out.println("Scelta non valida! Riprova.");
@@ -281,6 +281,7 @@ public class BattleManager {
             if(o.getNome().equals(oggettoUtilizzato))
             {
                 oggettoDaUtilizzare = o;
+                eroe.getInventario().remove(o);
                 break;
             }
         }

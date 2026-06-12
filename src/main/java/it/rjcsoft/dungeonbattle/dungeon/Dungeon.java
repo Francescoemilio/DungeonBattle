@@ -30,7 +30,7 @@ public class Dungeon {
         listaNemici = new ArrayList<>();
         eroe=null;
         battle=null;
-        //è UNA COSTANTE?
+
     }
 
 
