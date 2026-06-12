@@ -7,7 +7,10 @@ import java.util.concurrent.TimeUnit;
 import it.rjcsoft.dungeonbattle.combatsystem.BattleManager;
 import it.rjcsoft.dungeonbattle.oggetti.Arma;
 import it.rjcsoft.dungeonbattle.personaggi.*;
+import it.rjcsoft.dungeonbattle.nemici.Boss;
+import it.rjcsoft.dungeonbattle.nemici.Drago;
 import it.rjcsoft.dungeonbattle.nemici.Goblin;
+import it.rjcsoft.dungeonbattle.nemici.MindFlayer;
 import it.rjcsoft.dungeonbattle.nemici.Orco;
 import it.rjcsoft.dungeonbattle.nemici.Scheletro;
 
@@ -96,7 +99,7 @@ public class Dungeon {
 
         generaNemici(quantita);
         int counterScontri=0;
-        while(eroe.getHealth()>0 && nemici[0] instanceof Boss){
+        while(eroe.getHealth()>0 && nemici.getFirst() instanceof Boss){
             System.out.println(" ");
             BattleManager battle = new BattleManager(nemici.getFirst(),eroe);
             battle.iniziaCombattimento();
