@@ -1,6 +1,8 @@
 package it.rjcsoft.dungeonbattle.combatsystem;
 
 import it.rjcsoft.dungeonbattle.nemici.*;
+import it.rjcsoft.dungeonbattle.oggetti.Arma;
+import it.rjcsoft.dungeonbattle.oggetti.Oggetto;
 import it.rjcsoft.dungeonbattle.personaggi.Nemico;
 import it.rjcsoft.dungeonbattle.oggetti.Pozione;
 import it.rjcsoft.dungeonbattle.personaggi.Eroe;
@@ -39,8 +41,8 @@ public class BattleManager {
             }
 
             int dadoArmaNuova = tiraDado();
-            if(dadoArmaNuova > 5){
-                if(dadoArmaNuova>5 && dadoArmaNuova<16){
+            if(dadoArmaNuova > 5 && dadoArmaNuova < 16){
+
                     System.out.println("Hai trovato una pozione!");
 
                 }else if(dadoArmaNuova>16){
@@ -56,7 +58,7 @@ public class BattleManager {
                         System.out.println("Hai trovato un'ascia!");
 
                     }
-                }
+
             }else{
                 System.out.println("E' vuota...");
             }
@@ -168,7 +170,7 @@ public class BattleManager {
     private void usaOggetto(Oggetto oggetto) {
         if(oggetto == null)
         {
-            System.out.println("Oggetto " + oggetto.getNome() + " non presente nell'inventario");
+            System.out.println("Oggetto  non presente nell'inventario");
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
@@ -263,6 +265,7 @@ public class BattleManager {
         if (nemico.getHealth() > VITA_FINITA) {
             nemicoAttack();
         }
+
     }
 
     public void visualizzaInventario()
@@ -270,7 +273,6 @@ public class BattleManager {
         Scanner scanner = new Scanner(System.in);
         this.eroe.stampaInventario();
         System.out.println("Inserire l'oggetto da utilizzare");
-        scanner.nextLine();
         String oggettoUtilizzato = scanner.nextLine();
         oggettoUtilizzato = oggettoUtilizzato.toUpperCase();
         Oggetto oggettoDaUtilizzare = null;
