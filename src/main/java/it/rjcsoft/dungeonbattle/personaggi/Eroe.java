@@ -20,12 +20,6 @@ public class Eroe extends Personaggio {
 		}
 	}
 
-	public void stampa() {
-		for (int i = 0; i < 10; i++) {
-			System.out.println(o.get(i).toString());
-		}
-	}
-
 	public Pozione getPozione() {
 		Pozione pozione = (Pozione) o.get(0);
 		o.remove(0);
