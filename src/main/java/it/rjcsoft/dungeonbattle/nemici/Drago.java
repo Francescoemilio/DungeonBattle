@@ -2,8 +2,8 @@ package it.rjcsoft.dungeonbattle.nemici;
 
 public class Drago extends Boss {
 	
-	private static final int MAX_VITA = 100;
-    private static final int ATTACCO_BASE = 15;
+	private static final int MAX_VITA = 500;
+    private static final int ATTACCO_BASE = 70;
 	private static final String NOME = "DRAGO";
 
 	public Drago() {

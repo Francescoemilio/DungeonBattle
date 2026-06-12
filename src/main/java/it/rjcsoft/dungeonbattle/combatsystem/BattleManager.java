@@ -303,6 +303,7 @@ public class BattleManager {
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
+            this.forziere();
         }
 
         System.out.println("\n========== FINE COMBATTIMENTO ==========");
